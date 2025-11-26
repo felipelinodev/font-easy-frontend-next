@@ -1,0 +1,131 @@
+"use client";
+
+import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
+import { TextAreaInput } from "./components/TextAreaInput";
+import { ReactNode, useState } from "react";
+import ResquestFontEasy from "@/lib/RequestFontEasy";
+import RangeSlider from "./components/RangeSlider";
+import { FontCard } from "./components/FontCard";
+import RangeInput from "./components/RangeInput";
+import InputFontTextPreview from "./components/inputFontTextPreview";
+import Loader from "./components/Loader";
+import { JSX } from "react/jsx-runtime";
+
+type ValueInputProps = {
+  content: Array<{
+    content?: Array<{
+      text?: string;
+    }>;
+  }>;
+};
+
+type ResponseFontsProps = {
+  map(
+    arg0: (f: {
+      name: string;
+      rank: number;
+      category: string;
+      font_variation: number;
+      files: {
+        regular: string;
+        [key: string]: string | undefined;
+      };
+    }) => JSX.Element
+  ): ReactNode;
+  fonts: Array<{
+    name: string;
+    rank: number;
+    category: string;
+    font_variation: number;
+    files: {
+      regular: string;
+      [key: string]: string | undefined;
+    };
+  }>;
+};
+
+export default function ChatBot() {
+  const [valueChange, setValueChange] = useState<string>("");
+  const [fonts, setFonts] = useState<ResponseFontsProps>();
+  const [valueRangeSlider, setValueRangeSlider] = useState<number>(50);
+  const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
+  const [fontPreviewName, SetFontPreviewName] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleChange = (value: ValueInputProps) => {
+    const inputText = value.content[0]?.content?.[0]?.text;
+    if (inputText) {
+      setValueChange(inputText);
+    }
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    setLoading(true);
+    const userBodyResquest = {
+      prompt: valueChange,
+    };
+
+    const response = await ResquestFontEasy(userBodyResquest);
+    setFonts(response.response?.fonts);
+    setLoading(false);
+  };
+
+  return (
+    <div className="bg-[#F4F4F4] h-screen flex items-center justify-center">
+      <CompontsWapperCard>
+        <div>
+          <TextAreaInput
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            valueChange={valueChange}
+            valueRangeSlider={valueRangeSlider}
+          />
+          {!loading ? (
+            <>
+              <RangeSlider
+                min={0}
+                max={100}
+                defaultValue={50}
+                onChange={setValueRangeSlider}
+                showValue={true}
+              />
+              <div className="flex justify-between p-7 items-center">
+                <RangeInput
+                  setFontSizePreviw={setFontSizePreviw}
+                  fontSizePreviw={fontSizePreviw}
+                />
+                <InputFontTextPreview SetFontPreviewName={SetFontPreviewName} />
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center justify-center pb-5">
+              <Loader />
+            </div>
+          )}
+          <div
+            className="overflow-y-auto
+  [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:bg-transparent
+  [&::-webkit-scrollbar-thumb]:bg-transparent
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[56vh]"
+          >
+            {fonts &&
+              fonts?.map((f) => (
+                <FontCard
+                  key={f.rank}
+                  fontName={f.name}
+                  fontVariations={f.font_variation}
+                  fontsDownloadLinks={f.files}
+                  fontCategory={f.category}
+                  AcessType="FREE"
+                  fontSize={fontSizePreviw}
+                  textPreview={fontPreviewName}
+                />
+              ))}
+          </div>
+        </div>
+      </CompontsWapperCard>
+    </div>
+  );
+}

@@ -1,0 +1,27 @@
+import { Dispatch, SetStateAction } from "react";
+
+type InputTextPreviewProps = {
+  SetFontPreviewName: Dispatch<SetStateAction<string | undefined>>;
+};
+
+const InputFontTextPreview = ({
+  SetFontPreviewName,
+}: InputTextPreviewProps) => {
+  const handdleInput = (value: SetStateAction<string | undefined>) => {
+    SetFontPreviewName(value);
+  };
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Digite seu texto aqui"
+        className="h-10 border rounded-full p-5 placeholder-[#1E1E1C] border-[#BEBEBE]"
+        onChange={(e) => {
+          handdleInput(e.target.value);
+        }}
+      />
+    </div>
+  );
+};
+
+export default InputFontTextPreview;
