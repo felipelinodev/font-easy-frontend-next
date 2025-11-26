@@ -13,10 +13,7 @@ export const WordsAndsWeight = ({
 }: WordsAndsWeight) => {
   return (
     <>
-      <div
-        key={weight}
-        className="mr-1 mb-1 cursor-pointer wrap-break-word inline-block "
-      >
+      <div key={weight} className="mr-1 mb-2 cursor-pointer">
         <div className="p-2 flex items-center gap-3 rounded-[11px] bg-[#E3E3E3] ">
           <p className="pl-3">{word}</p>
           <p className="border-2 p-1 border-[#C1C1C1] rounded-[5px] color-[#C1C1C1]">

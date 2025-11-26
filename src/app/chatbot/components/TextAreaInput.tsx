@@ -7,9 +7,8 @@ import {
   ChatInputSubmitButton,
 } from "@/components/ui/chat-input";
 import { JSONContent } from "@tiptap/core";
-import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
-import { WordsAndsWeight } from "./WordsAndsWeight";
+import { Plus } from "lucide-react";
+import { Dispatch, SetStateAction } from "react";
 
 type ValueInputProps = {
   content: Array<{
@@ -19,36 +18,35 @@ type ValueInputProps = {
   }>;
 };
 
-type TextAreaProps = {
-  handleSubmit: () => void;
-  handleChange: (value: ValueInputProps) => void;
-  valueChange: string;
-  valueRangeSlider: number;
-};
-
 type WordsAndsWeightProps = {
   word: string;
   weight: number;
+  id: number;
+};
+
+type TextAreaProps = {
+  handleSubmit: () => void;
+  handleChange: (value: ValueInputProps) => void;
+  draftWord: string;
+  draftWeight: number;
+  SetKeywords: Dispatch<SetStateAction<WordsAndsWeightProps[]>>;
 };
 
 export function TextAreaInput({
   handleSubmit,
   handleChange,
-  valueChange,
-  valueRangeSlider,
+  draftWord,
+  draftWeight,
+  SetKeywords,
 }: TextAreaProps) {
-  const [keywords, SetKeywords] = useState<WordsAndsWeightProps[]>([]);
-
   const handdleWords = () => {
-    SetKeywords((prevWords) => [
+    const randomNumber: number = Math.floor(Math.random() * 10000);
+    SetKeywords((prevWords: WordsAndsWeightProps[]) => [
       ...prevWords,
-      { word: valueChange, weight: valueRangeSlider },
+      { word: draftWord, weight: draftWeight, id: randomNumber },
     ]);
   };
 
-  const RemovekeyWords = (myword: string) => {
-    SetKeywords((prevWords) => prevWords.filter((w) => w.word != myword));
-  };
   return (
     <div>
       <div className="w-full h-full flex justify-center items-center ">
@@ -71,18 +69,6 @@ export function TextAreaInput({
           </ChatInput>
         </div>
       </div>
-      <div className="p-5 w-[864.98px]">
-        {keywords.map((palavra: WordsAndsWeightProps) => (
-          <>
-            <WordsAndsWeight
-              word={palavra.word}
-              weight={palavra.weight}
-              RemovekeyWords={RemovekeyWords}
-            />
-          </>
-        ))}
-      </div>
-      <br />
     </div>
   );
 }

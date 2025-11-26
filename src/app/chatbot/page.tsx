@@ -10,6 +10,7 @@ import RangeInput from "./components/RangeInput";
 import InputFontTextPreview from "./components/inputFontTextPreview";
 import Loader from "./components/Loader";
 import { JSX } from "react/jsx-runtime";
+import { WordsAndsWeight } from "./components/WordsAndsWeight";
 
 type ValueInputProps = {
   content: Array<{
@@ -44,30 +45,42 @@ type ResponseFontsProps = {
   }>;
 };
 
+type WordsAndsWeightProps = {
+  word: string;
+  weight: number;
+  id: number;
+};
+
 export default function ChatBot() {
-  const [valueChange, setValueChange] = useState<string>("");
+  const [draftWord, setdraftWord] = useState<string>("");
   const [fonts, setFonts] = useState<ResponseFontsProps>();
-  const [valueRangeSlider, setValueRangeSlider] = useState<number>(50);
+  const [draftWeight, setdraftWeight] = useState<number>(50);
   const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
   const [fontPreviewName, SetFontPreviewName] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
 
+  const [keywords, SetKeywords] = useState<WordsAndsWeightProps[]>([]);
+
   const handleChange = (value: ValueInputProps) => {
     const inputText = value.content[0]?.content?.[0]?.text;
     if (inputText) {
-      setValueChange(inputText);
+      setdraftWord(inputText);
     }
   };
 
   const handleSubmit = async (): Promise<void> => {
     setLoading(true);
     const userBodyResquest = {
-      prompt: valueChange,
+      prompt: draftWord,
     };
 
     const response = await ResquestFontEasy(userBodyResquest);
     setFonts(response.response?.fonts);
     setLoading(false);
+  };
+
+  const RemovekeyWords = (myword: string) => {
+    SetKeywords((prevWords) => prevWords.filter((w) => w.word != myword));
   };
 
   return (
@@ -77,16 +90,30 @@ export default function ChatBot() {
           <TextAreaInput
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            valueChange={valueChange}
-            valueRangeSlider={valueRangeSlider}
+            draftWord={draftWord}
+            draftWeight={draftWeight}
+            SetKeywords={SetKeywords}
           />
+
+          {keywords.map((currentWord: WordsAndsWeightProps) => (
+            <div className="pr-5 pl-5 w-[864.98px]" key={currentWord.id}>
+              <>
+                <WordsAndsWeight
+                  word={currentWord.word}
+                  weight={currentWord.weight}
+                  RemovekeyWords={RemovekeyWords}
+                />
+              </>
+            </div>
+          ))}
+
           {!loading ? (
             <>
               <RangeSlider
                 min={0}
                 max={100}
                 defaultValue={50}
-                onChange={setValueRangeSlider}
+                onChange={setdraftWeight}
                 showValue={true}
               />
               <div className="flex justify-between p-7 items-center">

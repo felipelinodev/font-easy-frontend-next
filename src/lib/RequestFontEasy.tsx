@@ -6,7 +6,7 @@ export default async function RequestFontEasy({
   prompt,
 }: RequestFontEasyProps) {
   try {
-    const token = process.env.FE_API_KEY;
+    const token: string | undefined = process.env.FE_API_KEY;
     const request = fetch("https://recommend-ia-api-ashy.vercel.app/textual", {
       method: "POST",
 
