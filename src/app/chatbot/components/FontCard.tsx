@@ -19,7 +19,6 @@ export const FontCard = ({
   fontVariations,
   fontCategory,
   fontsDownloadLinks,
-  AcessType,
   fontSize,
   textPreview,
 }: FontCardProps) => {

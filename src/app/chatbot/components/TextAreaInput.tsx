@@ -22,6 +22,7 @@ type WordsAndsWeightProps = {
   word: string;
   weight: number;
   id: number;
+  selected?: boolean;
 };
 
 type TextAreaProps = {
@@ -43,7 +44,7 @@ export function TextAreaInput({
     const randomNumber: number = Math.floor(Math.random() * 10000);
     SetKeywords((prevWords: WordsAndsWeightProps[]) => [
       ...prevWords,
-      { word: draftWord, weight: draftWeight, id: randomNumber },
+      { word: draftWord, weight: draftWeight, id: randomNumber, selected: false },
     ]);
   };
 

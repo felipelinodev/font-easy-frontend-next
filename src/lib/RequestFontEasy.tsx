@@ -1,5 +1,6 @@
 type RequestFontEasyProps = {
-  prompt: string;
+  prompt: string | { [key: string]: number };
+
 };
 
 export default async function RequestFontEasy({

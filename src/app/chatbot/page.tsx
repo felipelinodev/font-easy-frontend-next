@@ -49,6 +49,7 @@ type WordsAndsWeightProps = {
   word: string;
   weight: number;
   id: number;
+  selected?: boolean;
 };
 
 export default function ChatBot() {
@@ -70,6 +71,11 @@ export default function ChatBot() {
 
   const handleSubmit = async (): Promise<void> => {
     setLoading(true);
+    keywords.map((word) => {
+      if (word.selected === true) {
+        alert("TEM UM CARD PALAVRA CHAVE AI")
+      }})
+    
     const userBodyResquest = {
       prompt: draftWord,
     };
@@ -83,6 +89,14 @@ export default function ChatBot() {
     SetKeywords((prevWords) => prevWords.filter((w) => w.word != myword));
   };
 
+  const handdleSelectItem = (id: number) => {
+    SetKeywords((prevWords) =>
+      prevWords.map((word) =>
+        word.id === id ? { ...word, selected: !word.selected } : word
+      )
+    );
+  }
+
   return (
     <div className="bg-[#F4F4F4] h-screen flex items-center justify-center">
       <CompontsWapperCard>
@@ -95,18 +109,18 @@ export default function ChatBot() {
             SetKeywords={SetKeywords}
           />
 
-          {keywords.map((currentWord: WordsAndsWeightProps) => (
-            <div className="pr-5 pl-5 w-[864.98px]" key={currentWord.id}>
-              <>
+          <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]" >
+            {keywords.map((currentWord: WordsAndsWeightProps) => (
+              <div key={currentWord.id} onClick={() => handdleSelectItem(currentWord.id)} >
                 <WordsAndsWeight
                   word={currentWord.word}
                   weight={currentWord.weight}
                   RemovekeyWords={RemovekeyWords}
+                  isSelected={currentWord.selected}
                 />
-              </>
-            </div>
-          ))}
-
+              </div>
+            ))}
+          </div>
           {!loading ? (
             <>
               <RangeSlider
@@ -135,7 +149,7 @@ export default function ChatBot() {
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[56vh]"
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[8em]"
           >
             {fonts &&
               fonts?.map((f) => (
