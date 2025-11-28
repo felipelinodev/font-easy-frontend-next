@@ -44,14 +44,19 @@ export function TextAreaInput({
     const randomNumber: number = Math.floor(Math.random() * 10000);
     SetKeywords((prevWords: WordsAndsWeightProps[]) => [
       ...prevWords,
-      { word: draftWord, weight: draftWeight, id: randomNumber, selected: false },
+      {
+        word: draftWord,
+        weight: draftWeight,
+        id: randomNumber,
+        selected: false,
+      },
     ]);
   };
 
   return (
     <div>
       <div className="w-full h-full flex justify-center items-center ">
-        <div className="w-full space-y-4 min-w-[864.98px] max-w-[864.98px] p-5">
+        <div className="w-full space-y-4 max-w-[864.98px] p-5">
           <ChatInput
             onSubmit={handleSubmit}
             onChange={(v: JSONContent | null) => handleChange(v)}

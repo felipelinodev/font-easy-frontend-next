@@ -37,7 +37,7 @@ export const FontCard = ({
       font-style: normal;}
      `}
       </style>
-      <div className="bg-[#ECECEC] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-b-2 border-[#D1D1D1]">
+      <div className="bg-[#ECECEC] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]">
         <h1
           className="text-[#1E1E1C] inline-block"
           style={{

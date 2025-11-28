@@ -53,15 +53,6 @@ type WordsAndsWeightProps = {
   selected?: boolean;
 };
 
-type MomentPromptItem = {
-  word: string;
-  weight: number;
-};
-
-type PromptObject = {
-  [key: string]: number;
-};
-
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
   const [fonts, setFonts] = useState<ResponseFontsProps>();
@@ -130,61 +121,66 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
-    <div className="bg-[#F4F4F4] h-screen flex items-center justify-center">
+    <div className="bg-[#F4F4F4] flex items-center justify-center">
       <CompontsWapperCard>
         <div>
-          <TextAreaInput
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            draftWord={draftWord}
-            draftWeight={draftWeight}
-            SetKeywords={SetKeywords}
-          />
+          <div>
+            <TextAreaInput
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              draftWord={draftWord}
+              draftWeight={draftWeight}
+              SetKeywords={SetKeywords}
+            />
 
-          <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
-            {keywords.map((currentWord: WordsAndsWeightProps) => (
-              <div
-                key={currentWord.id}
-                onClick={() => handdleSelectItem(currentWord.id)}
-              >
-                <WordsAndsWeight
-                  word={currentWord.word}
-                  weight={currentWord.weight}
-                  RemovekeyWords={RemovekeyWords}
-                  isSelected={currentWord.selected}
-                />
-              </div>
-            ))}
-          </div>
-          {!loading ? (
-            <>
-              <RangeSlider
-                min={0}
-                max={100}
-                defaultValue={50}
-                onChange={setdraftWeight}
-                showValue={true}
-              />
-              <div className="flex justify-between p-7 items-center">
-                <RangeInput
-                  setFontSizePreviw={setFontSizePreviw}
-                  fontSizePreviw={fontSizePreviw}
-                />
-                <InputFontTextPreview SetFontPreviewName={SetFontPreviewName} />
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center justify-center pb-5">
-              <Loader />
+            <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
+              {keywords.map((currentWord: WordsAndsWeightProps) => (
+                <div
+                  key={currentWord.id}
+                  onClick={() => handdleSelectItem(currentWord.id)}
+                >
+                  <WordsAndsWeight
+                    word={currentWord.word}
+                    weight={currentWord.weight}
+                    RemovekeyWords={RemovekeyWords}
+                    isSelected={currentWord.selected}
+                  />
+                </div>
+              ))}
             </div>
-          )}
+            {!loading ? (
+              <>
+                <RangeSlider
+                  min={0}
+                  max={100}
+                  defaultValue={50}
+                  onChange={setdraftWeight}
+                  showValue={true}
+                />
+                <div className="flex justify-between p-7 items-center">
+                  <RangeInput
+                    setFontSizePreviw={setFontSizePreviw}
+                    fontSizePreviw={fontSizePreviw}
+                  />
+                  <InputFontTextPreview
+                    SetFontPreviewName={SetFontPreviewName}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center justify-center pb-5">
+                <Loader />
+              </div>
+            )}
+          </div>
+
           <div
-            className="overflow-y-auto
+            className="
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[15em]"
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
           >
             {fonts &&
               fonts?.map((f) => (
