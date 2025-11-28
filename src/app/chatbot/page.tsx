@@ -2,7 +2,7 @@
 
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import ResquestFontEasy from "@/lib/RequestFontEasy";
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
@@ -11,6 +11,7 @@ import InputFontTextPreview from "./components/inputFontTextPreview";
 import Loader from "./components/Loader";
 import { JSX } from "react/jsx-runtime";
 import { WordsAndsWeight } from "./components/WordsAndsWeight";
+import { normalizeTo100 } from "@/lib/NormalizePrompt";
 
 type ValueInputProps = {
   content: Array<{
@@ -52,6 +53,15 @@ type WordsAndsWeightProps = {
   selected?: boolean;
 };
 
+type MomentPromptItem = {
+  word: string;
+  weight: number;
+};
+
+type PromptObject = {
+  [key: string]: number;
+};
+
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
   const [fonts, setFonts] = useState<ResponseFontsProps>();
@@ -71,17 +81,29 @@ export default function ChatBot() {
 
   const handleSubmit = async (): Promise<void> => {
     setLoading(true);
-    keywords.map((word) => {
-      if (word.selected === true) {
-        alert("TEM UM CARD PALAVRA CHAVE AI")
-      }})
-    
-    const userBodyResquest = {
-      prompt: draftWord,
-    };
 
-    const response = await ResquestFontEasy(userBodyResquest);
-    setFonts(response.response?.fonts);
+    if (keywords.length > 0) {
+      const momentPrompt = keywords.reduce((acc, item) => {
+        acc[item.word] = item.weight;
+        return acc;
+      }, {});
+
+      const normalizePrompt = normalizeTo100(momentPrompt);
+
+      const userBodyResquestStructured = {
+        prompt: normalizePrompt,
+      };
+
+      const response = await ResquestFontEasy(userBodyResquestStructured);
+      setFonts(response.response?.fonts);
+    } else {
+      const userBodyResquest = {
+        prompt: draftWord,
+      };
+
+      const response = await ResquestFontEasy(userBodyResquest);
+      setFonts(response.response?.fonts);
+    }
     setLoading(false);
   };
 
@@ -92,10 +114,20 @@ export default function ChatBot() {
   const handdleSelectItem = (id: number) => {
     SetKeywords((prevWords) =>
       prevWords.map((word) =>
-        word.id === id ? { ...word, selected: !word.selected } : word
+        word.id === id
+          ? { ...word, selected: !word.selected }
+          : { ...word, selected: false }
       )
     );
-  }
+  };
+
+  useEffect(() => {
+    SetKeywords((prevWords) =>
+      prevWords.map((word) =>
+        word.selected ? { ...word, weight: draftWeight } : word
+      )
+    );
+  }, [draftWeight]);
 
   return (
     <div className="bg-[#F4F4F4] h-screen flex items-center justify-center">
@@ -109,9 +141,12 @@ export default function ChatBot() {
             SetKeywords={SetKeywords}
           />
 
-          <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]" >
+          <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
             {keywords.map((currentWord: WordsAndsWeightProps) => (
-              <div key={currentWord.id} onClick={() => handdleSelectItem(currentWord.id)} >
+              <div
+                key={currentWord.id}
+                onClick={() => handdleSelectItem(currentWord.id)}
+              >
                 <WordsAndsWeight
                   word={currentWord.word}
                   weight={currentWord.weight}
@@ -149,7 +184,7 @@ export default function ChatBot() {
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[8em]"
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 max-h-[15em]"
           >
             {fonts &&
               fonts?.map((f) => (

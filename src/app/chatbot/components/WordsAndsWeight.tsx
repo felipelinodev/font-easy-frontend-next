@@ -12,15 +12,18 @@ export const WordsAndsWeight = ({
   word,
   weight,
   RemovekeyWords,
-  isSelected
+  isSelected,
 }: WordsAndsWeight) => {
-  
   return (
     <>
       <div key={weight} className={`mr-1 mb-2 cursor-pointer `}>
-        <div className={`p-2 flex items-center ${isSelected ? 'border border-[#A5A5A5]' : ''} gap-3 rounded-[11px] bg-[#E3E3E3]`}>
+        <div
+          className={`p-2 flex items-center ${
+            isSelected ? "border border-[#A5A5A5]" : ""
+          } gap-3 rounded-[11px] bg-[#E3E3E3]`}
+        >
           <p className="pl-3">{word}</p>
-          <p className="border-2 p-1 border-[#C1C1C1] rounded-[5px] color-[#C1C1C1]">
+          <p className="border p-1 border-[#C1C1C1] rounded-[5px] color-[#C1C1C1]">
             {weight}%
           </p>
           <button
@@ -34,4 +37,3 @@ export const WordsAndsWeight = ({
     </>
   );
 };
-
