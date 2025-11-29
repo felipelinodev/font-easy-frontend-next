@@ -153,7 +153,11 @@ export default function ChatBot() {
             </div>
             {!loading ? (
               <>
-                <div className="mx-5 my-2">
+                <div
+                  className={` ${
+                    keywords.length > 0 ? "block" : "hidden"
+                  } mx-5 my-2`}
+                >
                   <RangeSlider
                     min={0}
                     max={100}
@@ -162,16 +166,17 @@ export default function ChatBot() {
                     showValue={true}
                   />
                 </div>
-
-                <div className="flex justify-between p-7 items-center">
-                  <RangeInput
-                    setFontSizePreviw={setFontSizePreviw}
-                    fontSizePreviw={fontSizePreviw}
-                  />
-                  <InputFontTextPreview
-                    SetFontPreviewName={SetFontPreviewName}
-                  />
-                </div>
+                {fonts && fonts ? (
+                  <div className="flex justify-between p-7 items-center">
+                    <RangeInput
+                      setFontSizePreviw={setFontSizePreviw}
+                      fontSizePreviw={fontSizePreviw}
+                    />
+                    <InputFontTextPreview
+                      SetFontPreviewName={SetFontPreviewName}
+                    />
+                  </div>
+                ) : null}
               </>
             ) : (
               <div className="flex items-center justify-center pb-5">
