@@ -74,7 +74,7 @@ export default function ChatBot() {
     setLoading(true);
 
     if (keywords.length > 0) {
-      const momentPrompt = keywords.reduce((acc, item) => {
+      const momentPrompt = keywords.reduce((acc:any, item: WordsAndsWeightProps) => {
         acc[item.word] = item.weight;
         return acc;
       }, {});
@@ -121,7 +121,7 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
-    <div className="bg-[#F4F4F4] flex items-center justify-center">
+    <div className=" min-h-full flex items-center justify-center">
       <CompontsWapperCard>
         <div>
           <div>
