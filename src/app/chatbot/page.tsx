@@ -74,10 +74,13 @@ export default function ChatBot() {
     setLoading(true);
 
     if (keywords.length > 0) {
-      const momentPrompt = keywords.reduce((acc:any, item: WordsAndsWeightProps) => {
-        acc[item.word] = item.weight;
-        return acc;
-      }, {});
+      const momentPrompt = keywords.reduce(
+        (acc: any, item: WordsAndsWeightProps) => {
+          acc[item.word] = item.weight;
+          return acc;
+        },
+        {}
+      );
 
       const normalizePrompt = normalizeTo100(momentPrompt);
 
@@ -150,13 +153,16 @@ export default function ChatBot() {
             </div>
             {!loading ? (
               <>
-                <RangeSlider
-                  min={0}
-                  max={100}
-                  defaultValue={50}
-                  onChange={setdraftWeight}
-                  showValue={true}
-                />
+                <div className="mx-5 my-2">
+                  <RangeSlider
+                    min={0}
+                    max={100}
+                    defaultValue={50}
+                    onChange={setdraftWeight}
+                    showValue={true}
+                  />
+                </div>
+
                 <div className="flex justify-between p-7 items-center">
                   <RangeInput
                     setFontSizePreviw={setFontSizePreviw}

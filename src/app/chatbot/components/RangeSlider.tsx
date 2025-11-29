@@ -64,10 +64,13 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   }, [isDragging]);
 
   return (
-    <div className="relative p-5 w-full max-w-[1000px]">
+    <div className="relative bg-[#E3E3E3] rounded-[11px] pt-2.5 pb-5 px-5 w-full max-w-[1000px]">
+      <h1 className="flex items-center pb-2 text-[#1E1E1C] text-sm">
+        Escolha a intensidade do atributo
+      </h1>
       <div
         ref={sliderRef}
-        className="relative h-16 bg-gradient-to-r from-[#2a2a2a] via-[#5a5a5a] to-[#e5e5e5] rounded cursor-pointer"
+        className="relative h-16 bg-linear-to-r from-[#2a2a2a] via-[#5a5a5a] to-[#e5e5e5] rounded cursor-pointer"
         onMouseDown={handleMouseDown}
       >
         <div
