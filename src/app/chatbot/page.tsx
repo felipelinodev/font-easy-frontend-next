@@ -65,9 +65,7 @@ export default function ChatBot() {
 
   const handleChange = (value: ValueInputProps) => {
     const inputText = value.content[0]?.content?.[0]?.text;
-    if (inputText) {
-      setdraftWord(inputText);
-    }
+    setdraftWord(inputText!);
   };
 
   const handleSubmit = async (): Promise<void> => {

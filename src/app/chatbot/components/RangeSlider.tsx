@@ -64,7 +64,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   }, [isDragging]);
 
   return (
-    <div className="relative bg-[#E3E3E3] rounded-[11px] pt-2.5 pb-5 px-5 w-full max-w-[1000px]">
+    <div className="relative bg-[#E3E3E3] mb-5 rounded-[11px] pt-2.5 pb-5 px-5 w-full max-w-[1000px]">
       <h1 className="flex items-center pb-2 text-[#1E1E1C] text-sm">
         Escolha a intensidade do atributo
       </h1>

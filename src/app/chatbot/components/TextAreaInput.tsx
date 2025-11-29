@@ -62,15 +62,24 @@ export function TextAreaInput({
             onChange={(v: JSONContent | null) => handleChange(v)}
             className="text-[#1E1E1C] bg-[#ECECEC] border-[#D1D1D1] rounded-2xl"
           >
-            <ChatInputEditor placeholder="Fonte moderna e elegante" />
+            <ChatInputEditor placeholder="Digite um prompt de recomendação ou um atributo." />
             <ChatInputGroupAddon align="block-end">
-              <ChatInputSubmitButton className="ml-auto bg-amber-500  hover:bg-orange-600 cursor-pointer" />
+              <ChatInputSubmitButton
+                disabled={!draftWord || draftWord.length === 0}
+                className="ml-auto bg-amber-500 disabled:text-[#b8b8b8] hover:bg-orange-600 cursor-pointer disabled:bg-[#dddddd]"
+              />
             </ChatInputGroupAddon>
+
             <button
               onClick={handdleWords}
-              className="ml-auto flex items-center mr-3 border rounded-full hover:border-amber-400 border-amber-500 justify-center h-8 w-8 cursor-pointer"
+              disabled={!draftWord || draftWord.length === 0}
+              className="ml-auto flex items-center disabled:border-[#dddddd] mr-3 border rounded-full hover:border-amber-400 border-amber-500 justify-center h-8 w-8 cursor-pointer"
             >
-              <Plus className="text-amber-500 rounded-full hover:text-amber-400" />
+              {!draftWord || draftWord.length === 0 ? (
+                <Plus className="text-[#dddddd] rounded-full hover:text-amber-400" />
+              ) : (
+                <Plus className="text-amber-500 rounded-full hover:text-amber-400" />
+              )}
             </button>
           </ChatInput>
         </div>
