@@ -1,13 +1,7 @@
 "use client";
-import React, {
-  Children,
-  createContext,
-  JSX,
-  ReactNode,
-  useState,
-} from "react";
+import React, { createContext, useState } from "react";
 
-type FontItem = {
+export type FontItem = {
   name: string;
   rank: number;
   category: string;

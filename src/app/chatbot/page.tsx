@@ -2,7 +2,7 @@
 
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import ResquestFontEasy from "@/lib/RequestFontEasy";
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
@@ -12,6 +12,7 @@ import Loader from "./components/Loader";
 import { JSX } from "react/jsx-runtime";
 import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
+import { MainContext } from "../context/MainContext";
 
 type ValueInputProps = {
   content: Array<{
@@ -55,7 +56,11 @@ type WordsAndsWeightProps = {
 
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
-  const [fonts, setFonts] = useState<ResponseFontsProps>();
+
+  // Save state antigo
+  // const [fonts, setFonts] = useState<ResponseFontsProps>();
+  const { fonts, setFonts } = useContext(MainContext)!;
+
   const [draftWeight, setdraftWeight] = useState<number>(50);
   const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
   const [fontPreviewName, SetFontPreviewName] = useState<string>();
