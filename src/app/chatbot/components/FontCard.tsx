@@ -37,7 +37,10 @@ export const FontCard = ({
       font-style: normal;}
      `}
       </style>
-      <div className="bg-[#ECECEC] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]">
+      <div
+        onClick={() => redirect(`/chatbot/${fontName}`)}
+        className="bg-[#ECECEC] cursor-pointer hover:bg-[#e6e6e6] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]"
+      >
         <h1
           className="text-[#1E1E1C] inline-block"
           style={{
@@ -54,7 +57,7 @@ export const FontCard = ({
           </div>
           <div className="flex justify-end gap-3">
             <div
-              className="h-8 rounded-full px-8 justify-center w-fit flex items-center text-xs border-2 font-bold
+              className="h-8 rounded-full px-8 justify-center w-fit flex items-center text-xs border font-bold
             border-[#BEBEBE] text-[#BEBEBE]"
             >
               Gratuito

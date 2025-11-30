@@ -122,7 +122,7 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
-    <div className=" min-h-full flex items-center justify-center">
+    <div className="mt-15 mb-10 min-h-full flex items-center justify-center">
       <CompontsWapperCard>
         <div>
           <div>
