@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import RangeInput from "../components/RangeInput";
 import InputFontTextPreview from "../components/inputFontTextPreview";
 import ButtonFE from "@/components/font-easy-ui/Button";
+import { FontWeightCard } from "./components/FontWeightCard";
 type fontPageProps = {
   params: { fontPage: string };
 };
@@ -19,6 +20,36 @@ export default function FontPage({ params }: fontPageProps) {
   const [fontPreviewName, SetFontPreviewName] = useState<string>();
 
   const fontFilter = fonts.find((font) => font.font_id === fontId);
+
+  const fontVariation = {
+    "100": "Thin",
+    "100italic": "Thin Italic",
+
+    "200": "ExtraLight",
+    "200italic": "ExtraLight Italic",
+
+    "300": "Light",
+    "300italic": "Light Italic",
+
+    "400": "Regular",
+    regular: "Regular",
+    italic: "Regular Italic",
+
+    "500": "Medium",
+    "500italic": "Medium Italic",
+
+    "600": "SemiBold",
+    "600italic": "SemiBold Italic",
+
+    "700": "Bold",
+    "700italic": "Bold Italic",
+
+    "800": "ExtraBold",
+    "800italic": "ExtraBold Italic",
+
+    "900": "Black",
+    "900italic": "Black Italic",
+  };
 
   return (
     <>
@@ -84,6 +115,18 @@ export default function FontPage({ params }: fontPageProps) {
                 Baixar tudo
               </ButtonFE>
             </div>
+            {Object.entries(fontFilter?.files || {}).map(([weight, url]) => (
+              <div key={weight} className="pb-6">
+                <FontWeightCard
+                  weight={weight}
+                  fontName="Mussum Ipsom"
+                  fontVariationName={fontVariation[weight]}
+                  fontsDownloadLink={url}
+                  fontSize={fontSizePreviw}
+                  textPreview={fontPreviewName}
+                />
+              </div>
+            ))}
           </div>
         </CompontsWapperCard>
       </div>
