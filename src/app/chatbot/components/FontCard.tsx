@@ -1,7 +1,8 @@
 import { Upload } from "lucide-react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 type FontCardProps = {
+  fontIdUnique: string;
   fontName: string;
   fontVariations: number;
   fontsDownloadLinks: {
@@ -21,10 +22,13 @@ export const FontCard = ({
   fontsDownloadLinks,
   fontSize,
   textPreview,
+  fontIdUnique,
 }: FontCardProps) => {
   const handleRedirect = () => {
     redirect(fontsDownloadLinks.regular);
   };
+
+  const router = useRouter();
 
   return (
     <>
@@ -38,7 +42,7 @@ export const FontCard = ({
      `}
       </style>
       <div
-        onClick={() => redirect(`/chatbot/${fontName}`)}
+        onClick={() => router.push(`/chatbot/${fontIdUnique}`)}
         className="bg-[#ECECEC] cursor-pointer hover:bg-[#e6e6e6] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]"
       >
         <h1

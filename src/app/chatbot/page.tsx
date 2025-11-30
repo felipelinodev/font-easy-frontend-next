@@ -22,31 +22,6 @@ type ValueInputProps = {
   }>;
 };
 
-type ResponseFontsProps = {
-  map(
-    arg0: (f: {
-      name: string;
-      rank: number;
-      category: string;
-      font_variation: number;
-      files: {
-        regular: string;
-        [key: string]: string | undefined;
-      };
-    }) => JSX.Element
-  ): ReactNode;
-  fonts: Array<{
-    name: string;
-    rank: number;
-    category: string;
-    font_variation: number;
-    files: {
-      regular: string;
-      [key: string]: string | undefined;
-    };
-  }>;
-};
-
 type WordsAndsWeightProps = {
   word: string;
   weight: number;
@@ -57,8 +32,6 @@ type WordsAndsWeightProps = {
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
 
-  // Save state antigo
-  // const [fonts, setFonts] = useState<ResponseFontsProps>();
   const { fonts, setFonts } = useContext(MainContext)!;
 
   const [draftWeight, setdraftWeight] = useState<number>(50);
@@ -169,7 +142,7 @@ export default function ChatBot() {
                     showValue={true}
                   />
                 </div>
-                {fonts && fonts ? (
+                {fonts.length > 0 && (
                   <div className="flex justify-between p-7 items-center">
                     <RangeInput
                       setFontSizePreviw={setFontSizePreviw}
@@ -179,7 +152,7 @@ export default function ChatBot() {
                       SetFontPreviewName={SetFontPreviewName}
                     />
                   </div>
-                ) : null}
+                )}
               </>
             ) : (
               <div className="flex items-center justify-center pb-5">
@@ -199,6 +172,7 @@ export default function ChatBot() {
             {fonts &&
               fonts?.map((f) => (
                 <FontCard
+                  fontIdUnique={f.font_id}
                   key={f.rank}
                   fontName={f.name}
                   fontVariations={f.font_variation}

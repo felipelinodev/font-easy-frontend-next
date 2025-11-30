@@ -5,6 +5,7 @@ export type FontItem = {
   name: string;
   rank: number;
   category: string;
+  font_id: string;
   font_variation: number;
   files: {
     regular: string;
