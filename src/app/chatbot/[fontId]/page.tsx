@@ -117,7 +117,9 @@ export default function FontPage() {
                 <FontWeightCard
                   weight={weight}
                   fontName="Mussum Ipsom"
-                  fontVariationName={fontVariation[weight]}
+                  fontVariationName={
+                    fontVariation[weight as keyof typeof fontVariation]
+                  }
                   fontsDownloadLink={url}
                   fontSize={fontSizePreviw}
                   textPreview={fontPreviewName}

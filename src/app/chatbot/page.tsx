@@ -110,7 +110,7 @@ export default function ChatBot() {
           unoptimized
         />
         <p className="text-2xl p-3 bg-gradient-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
-          Ola{" "}
+          Ola
           <span className="bg-zinc-200 rounded-full pb-1 px-2 text-[#F07F1C]">
             Designer
           </span>{" "}
