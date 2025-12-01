@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
 import { ReactNode, useContext, useEffect, useState } from "react";
@@ -100,92 +100,111 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
-    <div className="mt-15 mb-10 min-h-full flex items-center justify-center">
-      <CompontsWapperCard>
-        <div>
-          <div>
-            <TextAreaInput
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              draftWord={draftWord}
-              draftWeight={draftWeight}
-              SetKeywords={SetKeywords}
-            />
+    <div className="mt-15 mb-10 min-h-full flex items-center justify-center flex-col">
+      <div className="p-10 flex flex-col items-center">
+        <Image
+          src="/LogoOficial.png"
+          alt="Logo da marca"
+          width={167}
+          height={44}
+          unoptimized
+        />
+        <p className="text-2xl p-3 bg-gradient-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
+          Ola{" "}
+          <span className="bg-zinc-200 rounded-full pb-1 px-2 text-[#F07F1C]">
+            Designer
+          </span>{" "}
+          , qual fonte deseja encontrar?
+        </p>
+      </div>
 
-            <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
-              {keywords.map((currentWord: WordsAndsWeightProps) => (
-                <div
-                  key={currentWord.id}
-                  onClick={() => handdleSelectItem(currentWord.id)}
-                >
-                  <WordsAndsWeight
-                    word={currentWord.word}
-                    weight={currentWord.weight}
-                    RemovekeyWords={RemovekeyWords}
-                    isSelected={currentWord.selected}
-                  />
-                </div>
-              ))}
-            </div>
-            {!loading ? (
-              <>
-                <div
-                  className={` ${
-                    keywords.length > 0 ? "block" : "hidden"
-                  } mx-5 my-2`}
-                >
-                  <RangeSlider
-                    min={0}
-                    max={100}
-                    defaultValue={50}
-                    onChange={setdraftWeight}
-                    showValue={true}
-                  />
-                </div>
-                {fonts.length > 0 && (
-                  <div className="flex justify-between p-7 items-center">
-                    <RangeInput
-                      setFontSizePreviw={setFontSizePreviw}
-                      fontSizePreviw={fontSizePreviw}
-                    />
-                    <InputFontTextPreview
-                      SetFontPreviewName={SetFontPreviewName}
+      <div>
+        <CompontsWapperCard>
+          <div>
+            <div>
+              <TextAreaInput
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                draftWord={draftWord}
+                draftWeight={draftWeight}
+                SetKeywords={SetKeywords}
+              />
+
+              <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
+                {keywords.map((currentWord: WordsAndsWeightProps) => (
+                  <div
+                    key={currentWord.id}
+                    onClick={() => handdleSelectItem(currentWord.id)}
+                  >
+                    <WordsAndsWeight
+                      word={currentWord.word}
+                      weight={currentWord.weight}
+                      RemovekeyWords={RemovekeyWords}
+                      isSelected={currentWord.selected}
                     />
                   </div>
-                )}
-              </>
-            ) : (
-              <div className="flex items-center justify-center pb-5">
-                <Loader />
+                ))}
               </div>
-            )}
-          </div>
+              {!loading ? (
+                <>
+                  <div
+                    className={` ${
+                      keywords.length > 0 ? "block" : "hidden"
+                    } mx-5 my-2`}
+                  >
+                    <RangeSlider
+                      min={0}
+                      max={100}
+                      defaultValue={50}
+                      onChange={setdraftWeight}
+                      showValue={true}
+                    />
+                  </div>
+                  {fonts.length > 0 && (
+                    <div className="flex justify-between p-7 items-center">
+                      <RangeInput
+                        setFontSizePreviw={setFontSizePreviw}
+                        fontSizePreviw={fontSizePreviw}
+                      />
+                      <InputFontTextPreview
+                        SetFontPreviewName={SetFontPreviewName}
+                      />
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="flex items-center justify-center pb-5">
+                  <Loader />
+                </div>
+              )}
+            </div>
 
-          <div
-            className="
+            <div
+              className="
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-transparent
   [&::-webkit-scrollbar-thumb]:bg-transparent
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-          >
-            {fonts &&
-              fonts?.map((f) => (
-                <FontCard
-                  fontIdUnique={f.font_id}
-                  key={f.rank}
-                  fontName={f.name}
-                  fontVariations={f.font_variation}
-                  fontsDownloadLinks={f.files}
-                  fontCategory={f.category}
-                  AcessType="FREE"
-                  fontSize={fontSizePreviw}
-                  textPreview={fontPreviewName}
-                />
-              ))}
+            >
+              {fonts &&
+                fonts?.map((f) => (
+                  <FontCard
+                    fontIdUnique={f.font_id}
+                    key={f.rank}
+                    fontName={f.name}
+                    fontVariations={f.font_variation}
+                    fontsDownloadLinks={f.files}
+                    fontCategory={f.category}
+                    AcessType="FREE"
+                    fontSize={fontSizePreviw}
+                    textPreview={fontPreviewName}
+                  />
+                ))}
+            </div>
           </div>
-        </div>
-      </CompontsWapperCard>
+        </CompontsWapperCard>
+      </div>
     </div>
   );
 }

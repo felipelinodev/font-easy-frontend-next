@@ -8,11 +8,8 @@ import RangeInput from "../components/RangeInput";
 import InputFontTextPreview from "../components/inputFontTextPreview";
 import ButtonFE from "@/components/font-easy-ui/Button";
 import { FontWeightCard } from "./components/FontWeightCard";
-type fontPageProps = {
-  params: { fontPage: string };
-};
 
-export default function FontPage({ params }: fontPageProps) {
+export default function FontPage() {
   const { fontId } = useParams();
   const { fonts } = useContext(MainContext)!;
 
