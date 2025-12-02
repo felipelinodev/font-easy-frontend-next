@@ -21,7 +21,7 @@ const RangeInput = ({ setFontSizePreviw, fontSizePreviw }: RangeInputProps) => {
 
       <input
         type="range"
-        className="h-1 accent-[#F07F1C] bg-[#FFDCC6] rounded-full  appearance-none cursor-pointer"
+        className="h-1 accent-[#F07F1C]  bg-[#FFDCC6] rounded-full  appearance-none cursor-pointer"
         onChange={(e) => HandleRange(e.target.value)}
       />
     </div>

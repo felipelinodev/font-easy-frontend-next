@@ -59,7 +59,7 @@ export default function FontPage() {
       font-style: normal;}
      `}
       </style>
-      <div className="flex gap-5 mb-10 mt-10 items-center flex-col justify-center">
+      <div className="flex gap-5 mt-32 mb-10  items-center flex-col justify-center">
         <CompontsWapperCard>
           <div className="p-10">
             <div className="flex items-center justify-between border-b pb-4 border-[#1E1E1C]">

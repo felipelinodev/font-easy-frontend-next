@@ -10,6 +10,7 @@ import {
   Mail,
 } from "lucide-react";
 import { MainContextProvider } from "./context/MainContext";
+import { FloatingMenu } from "@/components/font-easy-ui/FloatingMenu";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,7 +27,12 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${poppins.variable} h-screen antialiased bg-[#F4F4F4]`}>
         <MainContextProvider>
+          <div className="fixed z-50 top-0 right-0 left-0">
+            <FloatingMenu />
+          </div>
+
           {children}
+
           <footer className="text-[#1E1E1C] bg-[url(/rodape_bg.png)] bg-[#ECECEC] bg-contain bg-no-repeat">
             <div className="border-b border-b-[#1E1E1C]">
               <div className="p-16">

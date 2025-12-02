@@ -1,12 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // (LEMBRAR DE REMOVER DEPOIS) ISSO AQUI É SÓ PRA PASSAR NA VERCEL.....
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  ////////////////////////////////////////////
-
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.(".svg")

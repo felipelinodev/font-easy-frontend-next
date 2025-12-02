@@ -2,14 +2,13 @@
 import Image from "next/image";
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ResquestFontEasy from "@/lib/RequestFontEasy";
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
 import RangeInput from "./components/RangeInput";
 import InputFontTextPreview from "./components/inputFontTextPreview";
 import Loader from "./components/Loader";
-import { JSX } from "react/jsx-runtime";
 import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
 import { MainContext } from "../context/MainContext";
@@ -32,18 +31,26 @@ type WordsAndsWeightProps = {
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
 
-  const { fonts, setFonts } = useContext(MainContext)!;
+  const context = useContext(MainContext);
+
+  if (!context) {
+    throw new Error("Use context is null");
+  }
+
+  const { fonts, setFonts } = context;
 
   const [draftWeight, setdraftWeight] = useState<number>(50);
   const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
-  const [fontPreviewName, SetFontPreviewName] = useState<string>();
+  const [fontPreviewName, SetFontPreviewName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const [keywords, SetKeywords] = useState<WordsAndsWeightProps[]>([]);
 
   const handleChange = (value: ValueInputProps) => {
     const inputText = value.content[0]?.content?.[0]?.text;
-    setdraftWord(inputText!);
+    if (inputText) {
+      setdraftWord(inputText);
+    }
   };
 
   const handleSubmit = async (): Promise<void> => {
@@ -51,7 +58,7 @@ export default function ChatBot() {
 
     if (keywords.length > 0) {
       const momentPrompt = keywords.reduce(
-        (acc: any, item: WordsAndsWeightProps) => {
+        (acc: Record<string, number>, item: WordsAndsWeightProps) => {
           acc[item.word] = item.weight;
           return acc;
         },
@@ -78,7 +85,7 @@ export default function ChatBot() {
   };
 
   const RemovekeyWords = (myword: string) => {
-    SetKeywords((prevWords) => prevWords.filter((w) => w.word != myword));
+    SetKeywords((prevWords) => prevWords.filter((w) => w.word !== myword));
   };
 
   const handdleSelectItem = (id: number) => {
@@ -100,16 +107,9 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
-    <div className="mt-15 mb-10 min-h-full flex items-center justify-center flex-col">
+    <div className="mt-24 mb-10 min-h-full flex items-center justify-center flex-col">
       <div className="p-10 flex flex-col items-center">
-        <Image
-          src="/LogoOficial.png"
-          alt="Logo da marca"
-          width={167}
-          height={44}
-          unoptimized
-        />
-        <p className="text-2xl p-3 bg-gradient-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
+        <p className="text-2xl p-3 bg-linear-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
           Ola
           <span className="bg-zinc-200 rounded-full pb-1 px-2 text-[#F07F1C]">
             Designer

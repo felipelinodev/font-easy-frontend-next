@@ -1,7 +1,6 @@
 "use client";
-
 import Headline from "@/components/svg/HeadlineHome.svg";
-import { CircleArrowUp } from "lucide-react";
+import { CircleArrowUp, UserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
