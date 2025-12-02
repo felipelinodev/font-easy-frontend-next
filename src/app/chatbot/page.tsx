@@ -108,12 +108,12 @@ export default function ChatBot() {
 
   return (
     <div className="mt-24 mb-10 min-h-full flex items-center justify-center flex-col">
-      <div className="p-10 flex flex-col items-center">
-        <p className="text-2xl p-3 bg-linear-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
+      <div className="pt-10 pb-8 flex flex-col items-center">
+        <p className="text-2xl pt-5 bg-linear-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
           Ola
           <span className="bg-zinc-200 rounded-full pb-1 px-2 text-[#F07F1C]">
             Designer
-          </span>{" "}
+          </span>
           , qual fonte deseja encontrar?
         </p>
       </div>
