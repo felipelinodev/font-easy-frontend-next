@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
 import { useContext, useEffect, useState } from "react";
@@ -104,6 +104,7 @@ export default function ChatBot() {
         word.selected ? { ...word, weight: draftWeight } : word
       )
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draftWeight]);
 
   return (
@@ -157,7 +158,6 @@ export default function ChatBot() {
                       max={100}
                       defaultValue={50}
                       onChange={setdraftWeight}
-                      showValue={true}
                     />
                   </div>
                   {fonts.length > 0 && (

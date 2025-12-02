@@ -5,7 +5,6 @@ interface RangeSliderProps {
   max?: number;
   defaultValue?: number;
   onChange?: (value: number) => void;
-  showValue?: boolean;
 }
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
@@ -13,7 +12,6 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   max = 100,
   defaultValue = 50,
   onChange,
-  showValue = false,
 }) => {
   const [value, setValue] = useState<number>(defaultValue);
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -61,7 +59,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, updateValueFromMouse]);
 
   return (
     <div className="relative bg-[#E3E3E3] mb-5 rounded-[11px] pt-2.5 pb-5 px-5 w-full max-w-[1000px]">

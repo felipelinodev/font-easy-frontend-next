@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 
 type InputTextPreviewProps = {
-  SetFontPreviewName: Dispatch<SetStateAction<string | undefined>>;
+  SetFontPreviewName: Dispatch<SetStateAction<string>>;
 };
 
 const InputFontTextPreview = ({
   SetFontPreviewName,
 }: InputTextPreviewProps) => {
-  const handdleInput = (value: SetStateAction<string | undefined>) => {
+  const handdleInput = (value: SetStateAction<string>) => {
     SetFontPreviewName(value);
   };
   return (
