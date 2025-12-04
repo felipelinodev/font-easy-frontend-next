@@ -68,7 +68,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
       </h1>
       <div
         ref={sliderRef}
-        className="relative h-16 bg-linear-to-r from-[#2a2a2a] via-[#5a5a5a] to-[#e5e5e5] rounded cursor-pointer"
+        className="relative h-16 bg-linear-to-l from-[#2a2a2a] via-[#5a5a5a] to-[#e5e5e5] rounded cursor-pointer"
         onMouseDown={handleMouseDown}
       >
         <div
