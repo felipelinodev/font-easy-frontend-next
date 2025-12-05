@@ -2,7 +2,6 @@
 import { useContext, useState } from "react";
 import { CompontsWapperCard } from "../components/CompontsWapperCard";
 import { MainContext } from "@/app/context/MainContext";
-import React from "react";
 import { useParams } from "next/navigation";
 import RangeInput from "../components/RangeInput";
 import InputFontTextPreview from "../components/inputFontTextPreview";
@@ -14,7 +13,7 @@ export default function FontPage() {
   const { fonts } = useContext(MainContext)!;
 
   const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
-  const [fontPreviewName, SetFontPreviewName] = useState<string>();
+  const [fontPreviewName, SetFontPreviewName] = useState<string>("");
 
   const fontFilter = fonts.find((font) => font.font_id === fontId);
 

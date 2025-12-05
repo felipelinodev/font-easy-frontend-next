@@ -1,6 +1,6 @@
 "use client";
 import Headline from "@/components/svg/HeadlineHome.svg";
-import { Circle, CircleArrowUp, Zap } from "lucide-react";
+import { CircleArrowUp, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CardInfos } from "./chatbot/components/CardInfos";
 
