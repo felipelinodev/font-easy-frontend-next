@@ -13,7 +13,7 @@ export default function FontPage() {
   const { fonts } = useContext(MainContext)!;
 
   const [fontSizePreviw, setFontSizePreviw] = useState<number>(0);
-  const [fontPreviewName, SetFontPreviewName] = useState<string>("");
+  const [fontPreviewName, SetFontPreviewName] = useState<string>(""); //from vercel
 
   const fontFilter = fonts.find((font) => font.font_id === fontId);
 
