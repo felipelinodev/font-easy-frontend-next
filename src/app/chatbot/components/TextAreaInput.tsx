@@ -10,13 +10,13 @@ import { JSONContent } from "@tiptap/core";
 import { Plus } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
-type ValueInputProps = {
-  content: Array<{
-    content?: Array<{
-      text?: string;
-    }>;
-  }>;
-};
+// type ValueInputProps = {
+//   content: Array<{
+//     content?: Array<{
+//       text?: string;
+//     }>;
+//   }>;
+// };
 
 type WordsAndsWeightProps = {
   word: string;
@@ -27,7 +27,7 @@ type WordsAndsWeightProps = {
 
 type TextAreaProps = {
   handleSubmit: () => void;
-  handleChange: (value: ValueInputProps) => void;
+  handleChange: (value: JSONContent) => void;
   draftWord: string;
   draftWeight: number;
   SetKeywords: Dispatch<SetStateAction<WordsAndsWeightProps[]>>;
@@ -59,7 +59,7 @@ export function TextAreaInput({
         <div className="w-full space-y-4 max-w-[864.98px] p-5">
           <ChatInput
             onSubmit={handleSubmit}
-            onChange={(v: JSONContent | null) => handleChange(v)}
+            onChange={(v: JSONContent) => handleChange(v)}
             className="text-[#1E1E1C] bg-[#ECECEC] border-[#D1D1D1] rounded-2xl"
           >
             <ChatInputEditor placeholder="Digite um prompt de recomendação ou um atributo." />
