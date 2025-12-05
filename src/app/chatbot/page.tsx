@@ -12,14 +12,7 @@ import Loader from "./components/Loader";
 import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
 import { MainContext } from "../context/MainContext";
-
-type ValueInputProps = {
-  content: Array<{
-    content?: Array<{
-      text?: string;
-    }>;
-  }>;
-};
+import { JSONContent } from "@tiptap/core";
 
 type WordsAndsWeightProps = {
   word: string;
@@ -46,8 +39,9 @@ export default function ChatBot() {
 
   const [keywords, SetKeywords] = useState<WordsAndsWeightProps[]>([]);
 
-  const handleChange = (value: ValueInputProps) => {
-    const inputText = value.content[0]?.content?.[0]?.text;
+  const handleChange = (value: JSONContent) => {
+    const inputText = value.content?.[0]?.content?.[0]?.text ?? "";
+
     if (inputText) {
       setdraftWord(inputText);
     }

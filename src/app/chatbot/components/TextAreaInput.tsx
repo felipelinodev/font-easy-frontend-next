@@ -10,14 +10,6 @@ import { JSONContent } from "@tiptap/core";
 import { Plus } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
-// type ValueInputProps = {
-//   content: Array<{
-//     content?: Array<{
-//       text?: string;
-//     }>;
-//   }>;
-// };
-
 type WordsAndsWeightProps = {
   word: string;
   weight: number;
