@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import CustomSwitch from "./CustomSwitch";
+import CustomSwitch from "../../components/font-easy-ui/CustomSwitch";
 import Link from "next/link";
 import ButtonFE from "@/components/font-easy-ui/Button";
 import { UserRound } from "lucide-react";
 
 export const FloatingMenu = () => {
-  
   const [isSwicth, setIsSwitch] = useState<boolean>();
 
   const handdleSwitch = () => {
@@ -17,15 +16,15 @@ export const FloatingMenu = () => {
 
   return (
     <div className="h-16 m-10 mx-auto px-4 flex items-center max-w-[678.39px] justify-center gap-10 border-2 rounded-full max shadow-xl border-white bg-[#EFEFEF]">
-      <Link href='/'>
-      <Image
-        className="cursor-pointer"
-        src="/LogoOficial.png"
-        alt="Logo da marca"
-        width={121}
-        height={38}
-        unoptimized
-      />
+      <Link href="/">
+        <Image
+          className="cursor-pointer"
+          src="/LogoOficial.png"
+          alt="Logo da marca"
+          width={121}
+          height={38}
+          unoptimized
+        />
       </Link>
       <CustomSwitch checked={isSwicth!} onChange={handdleSwitch} />
       <ul className="flex items-center gap-4">
