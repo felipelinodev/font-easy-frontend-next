@@ -115,7 +115,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section>
+      <section className="flex gap-5">
         <div className="min-w-[556px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
           <Image
             src="/BgSectionFeedback.png"
@@ -146,6 +146,16 @@ export default function Home() {
             </ul>
           </div>
         </div>
+        <form className="min-w-[357px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
+          <label className="text-sm p-5 text-[#1E1E1C]" htmlFor="name">
+            Digite seu nome
+          </label>
+          <input
+            className="pl-5 bg-transparent text-[16px] border-2 placeholder:text-[16px] placeholder:text-[#1E1E1C] border-[#D1D1D1] min-h-[40px] w-full p-2 rounded-full"
+            type="text"
+            placeholder="Nome"
+          />
+        </form>
       </section>
     </div>
   );
