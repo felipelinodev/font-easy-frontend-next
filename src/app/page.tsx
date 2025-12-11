@@ -1,12 +1,19 @@
 "use client";
 import Headline from "@/components/svg/HeadlineHome.svg";
-import { CircleArrowUp, Zap } from "lucide-react";
+import {
+  CircleArrowUp,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Zap,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CardInfos } from "./chatbot/components/CardInfos";
 import { CardsArticles } from "./components/CardArticles";
 import TextType from "@/components/TextType";
 import { CardAtributesPreview } from "./components/CardAtributesPreview";
-
+import Image from "next/image";
 export default function Home() {
   const router = useRouter();
 
@@ -106,6 +113,38 @@ export default function Home() {
             erros, mais acertos, sucesso garantido."
             ImageSrc="/PreviewCardFontWight.jpg"
           />
+        </div>
+      </section>
+      <section>
+        <div className="min-w-[556px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
+          <Image
+            src="/BgSectionFeedback.png"
+            alt="Text image feedback"
+            width={476.09}
+            height={240.27}
+            className="mb-14"
+          />
+          <p className="ml-9 text-xs text-[#1E1E1C] max-w-[340.23px] mb-6">
+            Você pode nos seguir nas redes sociais e acompanhar as ultimas
+            novidades.
+          </p>
+
+          <div className=" flex text-right flex-col ml-9 ">
+            <ul className="flex gap-2">
+              <li className="p-1 bg-[#D1D1D1] rounded-full">
+                <Instagram size={20} />
+              </li>
+              <li className="p-1 bg-[#D1D1D1] rounded-full">
+                <Linkedin size={20} />
+              </li>
+              <li className="p-1 bg-[#D1D1D1] rounded-full">
+                <Mail size={20} />
+              </li>
+              <li className="p-1 bg-[#D1D1D1] rounded-full">
+                <Facebook size={20} />
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </div>
