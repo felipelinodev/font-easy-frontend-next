@@ -14,6 +14,7 @@ import { CardsArticles } from "./components/CardArticles";
 import TextType from "@/components/TextType";
 import { CardAtributesPreview } from "./components/CardAtributesPreview";
 import Image from "next/image";
+import { InputFE } from "@/components/font-easy-ui/InputFE";
 export default function Home() {
   const router = useRouter();
 
@@ -115,7 +116,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className="flex gap-5">
+      <section className="flex gap-5 my-40">
         <div className="min-w-[556px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
           <Image
             src="/BgSectionFeedback.png"
@@ -146,15 +147,38 @@ export default function Home() {
             </ul>
           </div>
         </div>
-        <form className="min-w-[357px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
-          <label className="text-sm p-5 text-[#1E1E1C]" htmlFor="name">
-            Digite seu nome
-          </label>
-          <input
-            className="pl-5 bg-transparent text-[16px] border-2 placeholder:text-[16px] placeholder:text-[#1E1E1C] border-[#D1D1D1] min-h-[40px] w-full p-2 rounded-full"
-            type="text"
-            placeholder="Nome"
+        <form className="min-w-[357px] bg-[#ECECEC] shadow-xl border-2  border-white rounded-2xl">
+          <Image
+            src="/BgSectionTopFeedback.png"
+            alt="image smils top feedback"
+            width={352.85}
+            height={102}
+            className="mb-3 rounded-t-2xl w-full border border-b-[#D1D1D1]"
           />
+          <div className="px-5">
+            <InputFE
+              label="Digite seu nome"
+              className="mb-3"
+              placeholder="Nome"
+              id="name"
+            />
+            <InputFE label="Digite seu email" placeholder="Email" id="email" />
+          </div>
+          <div className="p-5">
+            <textarea
+              placeholder="Poderia melhorar"
+              className="
+    text-[#1E1E1C] pl-5 pt-2 bg-[#ECECEC] border placeholder:text-[#1E1E1C] min-h-24 focus:outline-[#1E1E1C] focus:outline-offset-1  focus:placeholder:text-black/44 border-[#D1D1D1] rounded-2xl w-full
+
+  "
+            />
+            <button
+              onClick={handleRedirect}
+              className="bg-[#F07F1C] cursor-pointer w-full text-center text-neutral-200 rounded-full hover:bg-[#E9531E] p-2 text-[18px] "
+            >
+              Enviar feedback
+            </button>
+          </div>
         </form>
       </section>
     </div>
