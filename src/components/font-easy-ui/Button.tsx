@@ -14,7 +14,7 @@ const ButtonFE: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const variantStyles = {
-    primary: "bg-primary-orange text-neutral-200",
+    primary: "bg-primary-orange text-white-default",
     secondary: "bg-opacity-0 text-primary-orange",
     outline: " ",
     tertiary: " ",

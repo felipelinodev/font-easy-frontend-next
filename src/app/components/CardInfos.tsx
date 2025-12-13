@@ -11,7 +11,7 @@ export const CardInfos = ({ title, subtitle }: CardInfosProps) => {
       <Circle size={16} className="align-text-top text-primary-orange" />
       <div>
         <h3 className="text-[16px] font-medium">{title}</h3>
-        <p className="text-xs py-1 text-[#6B6B6B]">{subtitle}</p>
+        <p className="text-xs py-1  text-gray-muted-contrast">{subtitle}</p>
       </div>
     </div>
   );

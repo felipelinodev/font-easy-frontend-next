@@ -102,9 +102,9 @@ export default function ChatBot() {
   return (
     <div className="mt-24 mb-10 min-h-full flex items-center justify-center flex-col">
       <div className="pt-10 pb-8 flex flex-col items-center">
-        <p className="text-2xl pt-5 bg-linear-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
+        <p className="text-2xl pt-5 bg-linear-to-r from-black-default to-gray-muted-contrast bg-clip-text text-transparent">
           Ola
-          <span className="bg-zinc-200 rounded-full pb-1 px-2 text-primary-orange">
+          <span className="bg-white-default/70 rounded-full mx- pb-1 px-2 text-primary-orange">
             Designer
           </span>
           , qual fonte deseja encontrar?
@@ -152,7 +152,7 @@ export default function ChatBot() {
                       onChange={setdraftWeight}
                     />
                   </div>
-                  {fonts.length > 0 && (
+                  {fonts?.length > 0 && (
                     <div className="flex justify-between p-7 items-center">
                       <RangeInput
                         setFontSizePreviw={setFontSizePreviw}

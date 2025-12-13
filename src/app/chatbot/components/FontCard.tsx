@@ -43,7 +43,7 @@ export const FontCard = ({
       </style>
       <div
         onClick={() => router.push(`/chatbot/${fontIdUnique}`)}
-        className="bg-[#ECECEC] cursor-pointer hover:bg-[#e6e6e6] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]"
+        className="cursor-pointer hover:bg-white-default/40 overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t border-gray-escure"
       >
         <h1
           className="text-black-default inline-block"
@@ -68,7 +68,7 @@ export const FontCard = ({
             </div>
             <button
               onClick={handleRedirect}
-              className="h-8 w-8 rounded-full flex justify-center items-center  hover:primary-orange-twocursor-pointer bg-amber-500"
+              className="h-8 w-8 rounded-full flex justify-center items-center  hover:primary-orange-two cursor-pointer bg-amber-500"
             >
               <Upload className="w-4 h-4 text-[#DEDFDF] " />
             </button>

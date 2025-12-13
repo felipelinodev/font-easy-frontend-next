@@ -5,18 +5,18 @@ export const CardsArticles = () => {
   return (
     <div className="flex gap-6">
       <article className="transition duration-300 ease-in-out hover:scale-115 cursor-pointer min-w-3xs max-w-3xs rounded-2xl border-2 max shadow-xl border-white bg-gray-surface p-6">
-        <div className="h-12 flex items-center text-primary-orange justify-center bg-tertiary-orange rounded-[8px]  w-12">
+        <div className="h-12 flex items-center text-primary-orange justify-center bg-tertiary-orange rounded-[8px] w-12">
           <Bolt size={20} />
         </div>
         <h3 className="text-2xl text-black-default font-semibold py-6">
           Produtividade.
         </h3>
         <p className=" text-black-default text-xs pb-4">
-          Não perca, horas para escolher suas fontes.
+          Não perca horas escolhendo fontes.
         </p>
         <Link href="#">
-          <div className="bg-[#D1D1D1] h-8 flex items-center justify-end rounded-full">
-            <ArrowRight className="mr-3 text-[#BEBEBE]" />
+          <div className="bg-gray-escure h-8 flex items-center justify-end rounded-full">
+            <ArrowRight className="mr-3 text-gray-muted-contrast" />
           </div>
         </Link>
       </article>
@@ -31,8 +31,8 @@ export const CardsArticles = () => {
           Dê espaço para sua criatividade.
         </p>
         <Link href="#">
-          <div className="bg-[#D1D1D1] h-8 flex items-center justify-end rounded-full">
-            <ArrowRight className="mr-3 text-[#BEBEBE]" />
+          <div className="bg-gray-escure h-8 flex items-center justify-end rounded-full">
+            <ArrowRight className="mr-3 text-gray-muted-contrast" />
           </div>
         </Link>
       </article>
@@ -47,8 +47,8 @@ export const CardsArticles = () => {
           Escolha de forma fina e sensível.
         </p>
         <Link href="#">
-          <div className="bg-[#D1D1D1] h-8 flex items-center justify-end rounded-full">
-            <ArrowRight className="mr-3 text-[#BEBEBE]" />
+          <div className="bg-gray-escure h-8 flex items-center justify-end rounded-full">
+            <ArrowRight className="mr-3 text-gray-muted-contrast" />
           </div>
         </Link>
       </article>

@@ -50,6 +50,12 @@
   --color-black-default: var(--blackfe);
   --color-gray-surface: var(--gray3); /* cards, inputs, blocos */
   --color-gray-escure: var(--gray4); /*bordas, fundos especificos */
+
+  --color-gray-muted-primary: var(--gray5); /*para botões desativados*/
+  --color-gray-muted-contrast: var(--gray6);
+
+  --color-white-default: var(--whitefe);
+  --color-white-full: var (--whitefull);
 }
 
 :root {
@@ -92,12 +98,18 @@
   --orange3: #e9531e;
   --orange4: #ffdcc6;
 
-  --blackfe: #1e1e1c;
   --gray: #bebebe;
   --gray1: #d1d1d1;
   --gray2: #ececec;
   --gray3: #efefef;
   --gray4: #d4d4d4;
+  --gray5: #d9d9d9;
+
+  --gray6: #a3a3a3;
+
+  --blackfe: #1e1e1c;
+  --whitefe: #dedfdf;
+  --whitefull: #f4f4f4;
 }
 
 .dark {

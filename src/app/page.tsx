@@ -10,7 +10,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { CardInfos } from "./chatbot/components/CardInfos";
+import { CardInfos } from "./components/CardInfos";
 import { CardsArticles } from "./components/CardArticles";
 import TextType from "@/components/TextType";
 import { CardAtributesPreview } from "./components/CardAtributesPreview";
@@ -24,15 +24,15 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-test justify-center flex flex-col  items-center">
-      <div className=" bg-zinc-100 bg-center w-full bg-[url(/backgroun-home-page.jpg)] bg-contain bg-no-repeat flex flex-col items-center mt-50">
+    <div className="bg-test justify-center flex flex-col items-center">
+      <div className="bg-center w-full bg-[url(/backgroun-home-page.jpg)] bg-contain bg-no-repeat flex flex-col items-center mt-50">
         <Headline
           className="w-full h-auto max-w-[810px]"
           viewBox="0 0 810 212"
         />
         {/* <p className="text-2xl font-medium text-[#BEBEBE] p-7"> */}
         <TextType
-          className="text-2xl font-medium text-[#BEBEBE] p-7"
+          className="text-2xl font-medium text-gray-muted-contrast p-7"
           text={["Escolha suas fontes de uma maneira jamais vista."]}
           typingSpeed={35}
           pauseDuration={1500}
@@ -42,7 +42,7 @@ export default function Home() {
         {/* </p> */}
         <button
           onClick={handleRedirect}
-          className="bg-primary-orange transition duration-300 ease-in-out cursor-pointer hover:scale-110 text-neutral-200 flex items-center gap-2 rounded-full hover:bg-[#E9531E] p-2 text-2xl "
+          className="bg-primary-orange transition duration-300 ease-in-out cursor-pointer hover:scale-110 text-white-default flex items-center gap-2 rounded-full hover:bg-[#E9531E] p-2 text-2xl "
         >
           <p className="pb-1 pl-8">Iniciar</p>
           <div className="pl-3 pr-1">
@@ -75,7 +75,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <section className=" max-h-[1063.72px] w-full bg-[#F4F4F4]">
+      <section className="rounded-t-4xl max-h-[1063.72px] w-full bg-white-default/35">
         <article className="flex items-center flex-col">
           <h1 className="text-4xl font-bold p-11 text-primary-orange">
             Sobre nós
@@ -120,7 +120,7 @@ export default function Home() {
         </div>
       </section>
       <section className="flex gap-5 my-40">
-        <div className="min-w-[556px] p-10 bg-[#ECECEC] shadow-xl border-2 border-white rounded-2xl">
+        <div className="min-w-[556px] p-10 bg-gray-surface shadow-xl border-2 border-white rounded-2xl">
           <Image
             src="/BgSectionFeedback.png"
             alt="Text image feedback"
@@ -135,28 +135,28 @@ export default function Home() {
 
           <div className=" flex text-right flex-col ml-9 ">
             <ul className="flex gap-2">
-              <li className="p-1 bg-[#D1D1D1] rounded-full">
+              <li className="p-2 cursor-pointer bg-gray-escure rounded-full">
                 <Instagram size={20} />
               </li>
-              <li className="p-1 bg-[#D1D1D1] rounded-full">
+              <li className="p-2 cursor-pointer bg-gray-escure rounded-full">
                 <Linkedin size={20} />
               </li>
-              <li className="p-1 bg-[#D1D1D1] rounded-full">
+              <li className="p-2 cursor-pointer bg-gray-escure rounded-full">
                 <Mail size={20} />
               </li>
-              <li className="p-1 bg-[#D1D1D1] rounded-full">
+              <li className="p-2 cursor-pointer bg-gray-escure rounded-full">
                 <Facebook size={20} />
               </li>
             </ul>
           </div>
         </div>
-        <form className="min-w-[357px] bg-[#ECECEC] shadow-xl border-2  border-white rounded-2xl">
+        <form className="min-w-[357px] bg-gray-surface shadow-xl border-2  border-white rounded-2xl">
           <Image
             src="/BgSectionTopFeedback.png"
             alt="image smils top feedback"
             width={352.85}
             height={102}
-            className="mb-3 rounded-t-2xl w-full border border-b-[#D1D1D1]"
+            className="mb-3 rounded-t-2xl w-full border border-b-gray-escure"
           />
           <div className="px-5">
             <InputFE
@@ -171,13 +171,13 @@ export default function Home() {
             <textarea
               placeholder="Poderia melhorar"
               className="
-    text-black-default pl-5 pt-2 bg-[#ECECEC] border placeholder:text-black-default min-h-24 focus:outline-black-default focus:outline-offset-1  focus:placeholder:text-black/44 border-[#D1D1D1] rounded-2xl w-full
+    text-black-default pl-5 pt-2 bg-gray-muted-primary/24 border placeholder:text-black-default min-h-24 focus:outline-black-default focus:outline-offset-1  focus:placeholder:text-black/44 border-gray-escure rounded-2xl w-full
 
   "
             />
             <button
               onClick={handleRedirect}
-              className="bg-primary-orange cursor-pointer w-full text-center text-neutral-200 rounded-full hover:bg-[#E9531E] p-2 text-[18px] "
+              className="bg-primary-orange cursor-pointer w-full text-center text-white-default rounded-full hover:bg-primary-orange-two p-2 text-[18px] "
             >
               Enviar feedback
             </button>

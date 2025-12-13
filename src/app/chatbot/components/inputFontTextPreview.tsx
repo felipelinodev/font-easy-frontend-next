@@ -15,7 +15,7 @@ const InputFontTextPreview = ({
       <input
         type="text"
         placeholder="Digite seu texto aqui"
-        className="h-10 border rounded-full p-5 placeholder-black-default border-[#BEBEBE]"
+        className="h-10 border rounded-full p-5 placeholder-black-default border-gray-escure"
         onChange={(e) => {
           handdleInput(e.target.value);
         }}
