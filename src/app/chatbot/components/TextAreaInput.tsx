@@ -65,12 +65,12 @@ export function TextAreaInput({
             <button
               onClick={handdleWords}
               disabled={!draftWord || draftWord.length === 0}
-              className="ml-auto flex items-center disabled:border-[#dddddd] mr-3 border rounded-full hover:border-amber-400 border-amber-500 justify-center h-8 w-8 cursor-pointer"
+              className="ml-auto flex items-center disabled:border-[#dddddd] mr-3 border rounded-full  border-primary-orange justify-center h-8 w-8 cursor-pointer"
             >
               {!draftWord || draftWord.length === 0 ? (
-                <Plus className="text-[#dddddd] rounded-full hover:text-amber-400" />
+                <Plus className="text-[#dddddd] rounded-full" />
               ) : (
-                <Plus className="text-amber-500 rounded-full hover:text-amber-400" />
+                <Plus className="text-amber-500 rounded-full" />
               )}
             </button>
           </ChatInput>
