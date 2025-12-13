@@ -46,7 +46,7 @@ export const FontCard = ({
         className="bg-[#ECECEC] cursor-pointer hover:bg-[#e6e6e6] overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t-2 border-[#D1D1D1]"
       >
         <h1
-          className="text-[#1E1E1C] inline-block"
+          className="text-black-default inline-block"
           style={{
             fontFamily: fontName,
             fontSize: fontSize && fontSize > 0 ? `${fontSize}px` : "64px",
@@ -55,7 +55,7 @@ export const FontCard = ({
           {textPreview ? textPreview : fontName}
         </h1>
         <div className="flex flex-col  gap-8">
-          <div className="text-[16px] justify-end text-[#1E1E1C] flex gap-5">
+          <div className="text-[16px] justify-end text-black-default flex gap-5">
             <p>{fontVariations} variações</p>
             <p>{fontCategory}</p>
           </div>
@@ -68,7 +68,7 @@ export const FontCard = ({
             </div>
             <button
               onClick={handleRedirect}
-              className="h-8 w-8 rounded-full flex justify-center items-center  hover:bg-orange-600 cursor-pointer bg-amber-500"
+              className="h-8 w-8 rounded-full flex justify-center items-center  hover:primary-orange-twocursor-pointer bg-amber-500"
             >
               <Upload className="w-4 h-4 text-[#DEDFDF] " />
             </button>

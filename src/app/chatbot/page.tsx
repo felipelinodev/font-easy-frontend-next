@@ -106,7 +106,7 @@ export default function ChatBot() {
       <div className="pt-10 pb-8 flex flex-col items-center">
         <p className="text-2xl pt-5 bg-linear-to-r from-stone-900 to-zinc-400 bg-clip-text text-transparent">
           Ola
-          <span className="bg-zinc-200 rounded-full pb-1 px-2 text-[#F07F1C]">
+          <span className="bg-zinc-200 rounded-full pb-1 px-2 text-primary-orange">
             Designer
           </span>
           , qual fonte deseja encontrar?

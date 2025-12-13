@@ -41,7 +41,7 @@ export const FontWeightCard = ({
         <p className="text-sm ">{fontVariationName}</p>
         <div className="flex items-center justify-between">
           <h1
-            className="text-[#1E1E1C] inline-block"
+            className="text-black-default inline-block"
             style={{
               fontFamily: fontName,
               fontSize: fontSize && fontSize > 0 ? `${fontSize}px` : "64px",
@@ -55,7 +55,7 @@ export const FontWeightCard = ({
             <div className="flex justify-end gap-3">
               <button
                 onClick={handleRedirect}
-                className="h-8 w-8 rounded-full flex justify-center items-center  hover:bg-orange-600 cursor-pointer bg-amber-500"
+                className="h-8 w-8 rounded-full flex justify-center items-center  hover:primary-orange-twocursor-pointer bg-amber-500"
               >
                 <Upload className="w-4 h-4 text-[#DEDFDF] " />
               </button>

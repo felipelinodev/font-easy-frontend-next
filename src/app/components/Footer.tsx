@@ -10,8 +10,8 @@ import {
 
 export const Footer = () => {
   return (
-    <footer className="text-[#1E1E1C] bg-[url(/rodape_bg.png)] bg-[#ECECEC] bg-contain bg-no-repeat">
-      <div className="border-b border-b-[#1E1E1C]">
+    <footer className="text-black-default bg-[url(/rodape_bg.png)] bg-[#ECECEC] bg-contain bg-no-repeat">
+      <div className="border-b border-b-black-default">
         <div className="p-16">
           <Image
             src="/LogoOficial.png"

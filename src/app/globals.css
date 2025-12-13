@@ -41,6 +41,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --color-primary-orange: var(--orange1);
+  --color-primary-orange-two: var(--orange2);
+  --color-segundary-orange: var(--orange3);
+  --color-tertiary-orange: var(--orange4);
+
+  --color-black-default: var(--blackfe);
+  --color-gray-surface: var(--gray3); /* cards, inputs, blocos */
+  --color-gray-escure: var(--gray4); /*bordas, fundos especificos */
 }
 
 :root {
@@ -77,6 +86,18 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --font-poppins: "Poppins", sans-serif;
+
+  --orange1: #f07f1c;
+  --orange2: #e9531e;
+  --orange3: #e9531e;
+  --orange4: #ffdcc6;
+
+  --blackfe: #1e1e1c;
+  --gray: #bebebe;
+  --gray1: #d1d1d1;
+  --gray2: #ececec;
+  --gray3: #efefef;
+  --gray4: #d4d4d4;
 }
 
 .dark {

@@ -61,10 +61,10 @@ export default function FontPage() {
       <div className="flex gap-5 mt-32 mb-10  items-center flex-col justify-center">
         <CompontsWapperCard>
           <div className="p-10">
-            <div className="flex items-center justify-between border-b pb-4 border-[#1E1E1C]">
+            <div className="flex items-center justify-between border-b pb-4 border-black-default">
               <div className="flex items-center gap-6">
                 <h1
-                  className="text-4xl font-bold text-[#1E1E1C]"
+                  className="text-4xl font-bold text-black-default"
                   style={{ fontFamily: fontFilter?.name }}
                 >
                   {fontFilter?.name}
@@ -76,11 +76,11 @@ export default function FontPage() {
                   Gratuito
                 </div>
               </div>
-              <p className="text-sm text-[#1E1E1C]">
+              <p className="text-sm text-black-default">
                 License: Personal & Commercial Use!
               </p>
             </div>
-            <p className="text-[16px] pt-4 text-[#1E1E1C]">
+            <p className="text-[16px] pt-4 text-black-default">
               Mussum Ipsum, cacilds vidis litro abertis. Vehicula non. Ut sed ex
               eros. Vivamus sit amet nibh non tellus tristique interdum. Quem
               num gosta di mim que vai caçá sua turmis! Per aumento de cachacis,
@@ -92,7 +92,7 @@ export default function FontPage() {
         <CompontsWapperCard>
           <div>
             <h1
-              className="text-3xl p-6 text-center tracking-wide font-bold text-[#1E1E1C]"
+              className="text-3xl p-6 text-center tracking-wide font-bold text-black-default"
               style={{ fontFamily: fontFilter?.name }}
             >
               ABCDEFGHIJKLMNOPWXY123456789!@#$%^&*

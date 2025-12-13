@@ -15,7 +15,7 @@ export const FloatingMenu = () => {
   };
 
   return (
-    <div className="h-16 m-10 mx-auto px-4 flex items-center max-w-[678.39px] justify-center gap-10 border-2 rounded-full max shadow-xl border-white bg-[#EFEFEF]">
+    <div className="h-16 m-10 mx-auto px-4 flex items-center max-w-[678.39px] justify-center gap-10 border-2 rounded-full max shadow-xl border-white bg-gray-surface">
       <Link href="/">
         <Image
           className="cursor-pointer"
@@ -29,17 +29,17 @@ export const FloatingMenu = () => {
       <CustomSwitch checked={isSwicth!} onChange={handdleSwitch} />
       <ul className="flex items-center gap-4">
         <li>
-          <Link className="text-sm text-[#1E1E1C] font-medium" href="#">
+          <Link className="text-sm text-black-default font-medium" href="#">
             Sobre
           </Link>
         </li>
         <li>
-          <Link className="text-sm text-[#1E1E1C] font-medium" href="#">
+          <Link className="text-sm text-black-default font-medium" href="#">
             Github
           </Link>
         </li>
         <li>
-          <Link className="text-sm text-[#1E1E1C] font-medium" href="#">
+          <Link className="text-sm text-black-default font-medium" href="#">
             Contato
           </Link>
         </li>
@@ -48,7 +48,7 @@ export const FloatingMenu = () => {
         </ButtonFE>
       </ul>
       <Link
-        className="h-8 w-8 bg-[#D9D9D9] rounded-full flex items-center justify-center"
+        className="h-8 w-8 bg-gray-escure rounded-full flex items-center justify-center"
         href="#"
       >
         <UserRound size={18} />

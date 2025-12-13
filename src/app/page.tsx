@@ -1,4 +1,5 @@
 "use client";
+
 import Headline from "@/components/svg/HeadlineHome.svg";
 import {
   CircleArrowUp,
@@ -23,7 +24,7 @@ export default function Home() {
   };
 
   return (
-    <div className=" justify-center flex flex-col  items-center">
+    <div className="bg-test justify-center flex flex-col  items-center">
       <div className=" bg-zinc-100 bg-center w-full bg-[url(/backgroun-home-page.jpg)] bg-contain bg-no-repeat flex flex-col items-center mt-50">
         <Headline
           className="w-full h-auto max-w-[810px]"
@@ -41,7 +42,7 @@ export default function Home() {
         {/* </p> */}
         <button
           onClick={handleRedirect}
-          className="bg-orange-500 transition duration-300 ease-in-out cursor-pointer hover:scale-110 text-neutral-200 flex items-center gap-2 rounded-full hover:bg-[#E9531E] p-2 text-2xl "
+          className="bg-primary-orange transition duration-300 ease-in-out cursor-pointer hover:scale-110 text-neutral-200 flex items-center gap-2 rounded-full hover:bg-[#E9531E] p-2 text-2xl "
         >
           <p className="pb-1 pl-8">Iniciar</p>
           <div className="pl-3 pr-1">
@@ -69,15 +70,17 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-17 w-17 flex justify-center bg-white/50 backdrop-blur-sm relative border border-white/70 -top-10 ml-16 items-center text-orange-500 rounded-[9px]">
+          <div className="h-17 w-17 flex justify-center bg-white/50 backdrop-blur-sm relative border border-white/70 -top-10 ml-16 items-center text-primary-orange rounded-[9px]">
             <Zap size={31} />
           </div>
         </div>
       </div>
       <section className=" max-h-[1063.72px] w-full bg-[#F4F4F4]">
         <article className="flex items-center flex-col">
-          <h1 className="text-4xl font-bold p-11 text-[#F07F1C]">Sobre nós</h1>
-          <p className="text-2xl font-normal text-[#1E1E1C] max-w-[574px] text-center">
+          <h1 className="text-4xl font-bold p-11 text-primary-orange">
+            Sobre nós
+          </h1>
+          <p className="text-2xl font-normal text-black-default max-w-[574px] text-center">
             Somos uma plataforma que permite escolher fontes de forma inovadora,
             com o uso de inteligência artificial.
           </p>
@@ -88,7 +91,7 @@ export default function Home() {
       </section>
       <section className="flex w-full justify-center h-full gap-5 p-30">
         <div>
-          <p className="text-[#F07F1C] text-2xl max-w-96 mb-16">
+          <p className="text-primary-orange text-2xl max-w-96 mb-16">
             <span className="font-bold">A excelência</span> no design surge da
             harmonia entre <span className="font-bold"> sensibilidade </span> e
             <span className="font-bold"> precisão.</span>
@@ -125,7 +128,7 @@ export default function Home() {
             height={240.27}
             className="mb-14"
           />
-          <p className="ml-9 text-xs text-[#1E1E1C] max-w-[340.23px] mb-6">
+          <p className="ml-9 text-xs text-black-default max-w-[340.23px] mb-6">
             Você pode nos seguir nas redes sociais e acompanhar as ultimas
             novidades.
           </p>
@@ -168,13 +171,13 @@ export default function Home() {
             <textarea
               placeholder="Poderia melhorar"
               className="
-    text-[#1E1E1C] pl-5 pt-2 bg-[#ECECEC] border placeholder:text-[#1E1E1C] min-h-24 focus:outline-[#1E1E1C] focus:outline-offset-1  focus:placeholder:text-black/44 border-[#D1D1D1] rounded-2xl w-full
+    text-black-default pl-5 pt-2 bg-[#ECECEC] border placeholder:text-black-default min-h-24 focus:outline-black-default focus:outline-offset-1  focus:placeholder:text-black/44 border-[#D1D1D1] rounded-2xl w-full
 
   "
             />
             <button
               onClick={handleRedirect}
-              className="bg-[#F07F1C] cursor-pointer w-full text-center text-neutral-200 rounded-full hover:bg-[#E9531E] p-2 text-[18px] "
+              className="bg-primary-orange cursor-pointer w-full text-center text-neutral-200 rounded-full hover:bg-[#E9531E] p-2 text-[18px] "
             >
               Enviar feedback
             </button>

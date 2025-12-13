@@ -9,7 +9,7 @@ const CustomSwitch = ({ checked, onChange }: SwicthProps) => {
   return (
     <button
       onClick={() => onChange(!checked)}
-      className="relative flex cursor-pointer h-7 w-15 items-center rounded-full transition-all duration-300 border border-[#D1D1D1] bg-transparent"
+      className="relative flex cursor-pointer h-7 w-15 items-center rounded-full transition-all duration-300 border border-gray-escure bg-transparent"
     >
       <div
         className={`absolute flex h-5  w-5 items-center justify-center rounded-full bg-transparent transition-all duration-300 ${
