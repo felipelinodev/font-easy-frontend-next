@@ -42,9 +42,7 @@ export default function ChatBot() {
   const handleChange = (value: JSONContent) => {
     const inputText = value.content?.[0]?.content?.[0]?.text ?? "";
 
-    if (inputText) {
-      setdraftWord(inputText);
-    }
+    setdraftWord(inputText);
   };
 
   const handleSubmit = async (): Promise<void> => {
