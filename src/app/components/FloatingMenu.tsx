@@ -6,6 +6,7 @@ import CustomSwitch from "../../components/font-easy-ui/CustomSwitch";
 import Link from "next/link";
 import ButtonFE from "@/components/font-easy-ui/Button";
 import { UserRound } from "lucide-react";
+import { DropDownMenuProfile } from "./DropDownMenuProfile";
 
 export const FloatingMenu = () => {
   const [isSwicth, setIsSwitch] = useState<boolean>();
@@ -15,7 +16,7 @@ export const FloatingMenu = () => {
   };
 
   return (
-    <div className="h-16 m-10 mx-auto px-4 flex items-center max-w-[678.39px] justify-center gap-10 border-2 rounded-full max shadow-xl border-white bg-gray-surface">
+    <div className="h-16 mt-10 mx-auto px-4 flex items-center max-w-[678.39px] justify-center gap-10 border-2 rounded-full max shadow-xl border-white bg-gray-surface">
       <Link href="/">
         <Image
           className="cursor-pointer"
@@ -47,12 +48,7 @@ export const FloatingMenu = () => {
           Contribuir
         </ButtonFE>
       </ul>
-      <Link
-        className="h-8 w-8 bg-gray-escure rounded-full flex items-center justify-center"
-        href="#"
-      >
-        <UserRound size={18} />
-      </Link>
+      <DropDownMenuProfile />
     </div>
   );
 };
