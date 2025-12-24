@@ -171,7 +171,7 @@ export default function Home() {
             <textarea
               placeholder="Poderia melhorar"
               className="
-    text-black-default pl-5 pt-2 bg-gray-muted-primary/24 border placeholder:text-black-default min-h-24 focus:outline-black-default focus:outline-offset-1  focus:placeholder:text-black/44 border-gray-escure rounded-2xl w-full
+    text-black-default pl-5 pt-2 bg-gray-muted-primary/24 p-2 border placeholder:text-black-default min-h-24 focus:outline-black-default focus:outline-offset-1  focus:placeholder:text-black/44 border-gray-escure rounded-2xl w-full
 
   "
             />

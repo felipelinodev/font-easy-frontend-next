@@ -5,7 +5,6 @@ import Image from "next/image";
 import CustomSwitch from "../../components/font-easy-ui/CustomSwitch";
 import Link from "next/link";
 import ButtonFE from "@/components/font-easy-ui/Button";
-import { UserRound } from "lucide-react";
 import { DropDownMenuProfile } from "./DropDownMenuProfile";
 
 export const FloatingMenu = () => {

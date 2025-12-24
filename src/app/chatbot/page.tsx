@@ -3,7 +3,7 @@
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
 import { useContext, useEffect, useState } from "react";
-import ResquestFontEasy from "@/lib/RequestFontEasy";
+import { RequestFontEasy } from "@/lib/RequestFontEasy";  
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
 import RangeInput from "./components/RangeInput";
@@ -63,14 +63,14 @@ export default function ChatBot() {
         prompt: normalizePrompt,
       };
 
-      const response = await ResquestFontEasy(userBodyResquestStructured);
+      const response = await RequestFontEasy(userBodyResquestStructured);
       setFonts(response.response?.fonts);
     } else {
       const userBodyResquest = {
         prompt: draftWord,
       };
 
-      const response = await ResquestFontEasy(userBodyResquest);
+      const response = await RequestFontEasy(userBodyResquest);
       setFonts(response.response?.fonts);
     }
     setLoading(false);

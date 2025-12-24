@@ -1,10 +1,17 @@
 import { UserRound } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export function DropDownMenuProfile() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const areRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push("/login");
+  };
 
   const handdleOpen = () => {
     setIsOpen(!isOpen);
@@ -53,7 +60,10 @@ export function DropDownMenuProfile() {
             </p>
           </div>
           <div className="p-2">
-            <button className="border mb-1 hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full border-gray-escure w-full">
+            <button
+              onClick={handleLogin}
+              className="border mb-1 hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full border-gray-escure w-full"
+            >
               Entrar
             </button>
             <button className=" hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full  w-full">
