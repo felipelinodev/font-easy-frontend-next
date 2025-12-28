@@ -1,10 +1,10 @@
 "use client"
-import { useForm } from "react-hook-form";
 import { InputFE } from "@/components/font-easy-ui/InputFE";
 import Link from "next/link";
 import { PiGoogleLogoBold } from "react-icons/pi";
 import { signIn } from "next-auth/react"
-import { useState } from "react";
+import React, { useState } from "react";
+import { loginUserRequest } from "@/lib/RequetsApiNode";
 
 type LoginFormValues = {
   email: string;
@@ -15,35 +15,24 @@ type LoginFormValues = {
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>();
-
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("");
 
   const handdleSingIn = () => {
     signIn('google', { callbackUrl: '/profile' })
   }
 
-  const onSubmit = async (values: LoginFormValues) => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setIsLoading(true)
 
     try {
-      const request = await fetch('http://localhost:5000', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-
-      if (!request.ok) {
-        setIsLoading(false)
-        throw new Error('Erro ao fazer login')
-
-      }
+      console.log("Enviando para API:", { email, password });
+      await loginUserRequest({ email, password });
     } catch (error) {
-      setIsLoading(false)
       console.log(error)
-
     }
+    setIsLoading(false)
   }
 
 
@@ -51,10 +40,10 @@ export default function Login() {
     <div className="h-screen">
       <div className="max-w-80 w-full mt-70 m-auto bg-gray-surface border-2  shadow-2xl  border-white p-5 rounded-2xl">
         <h3 className="text-2xl font-bold mb-3 text-black-default">Entrar</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
-            <InputFE className="min-h-10 p-0" label="Email" type="email" placeholder="Digite seu email" id="email" />
-            <InputFE className="min-h-10 p-0 " label="Senha" type="password" placeholder="Digite sua senha" id="email" />
+            <InputFE onChange={(e) => setEmail(e.target.value)} className="min-h-10 p-0" label="Email" type="email" placeholder="Digite seu email" id="email" />
+            <InputFE onChange={(e) => setPassword(e.target.value)} className="min-h-10 p-0 " label="Senha" type="password" placeholder="Digite sua senha" id="email" />
           </div>
           <Link href="#" className="flex justify-end underline text-black-default text-sm">
             Esqueceu a senha?
