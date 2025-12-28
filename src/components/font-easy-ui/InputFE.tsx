@@ -39,7 +39,9 @@ export function InputFE({
           onChange={onChange}
           id={id}
           className={`focus:outline-1 focus:outline-black-default focus:outline-offset-1 bg-bg-gray-muted-primary/30 text-[16px] border placeholder:text-[16px] placeholder:text-black-default border-gray-escure min-h-10 w-full pl-4 ${isPasswordType ? "pr-12" : "pr-4"} p-2 m-1 rounded-full focus:placeholder:text-black/44 ${className}`}
+
           type={isPasswordType && showPassword ? "text" : type}
+
           placeholder={placeholder}
         />
         {isPasswordType && (
