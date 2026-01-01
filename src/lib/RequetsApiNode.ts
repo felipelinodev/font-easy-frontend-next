@@ -34,8 +34,10 @@ async function loginUserRequest(data: LoginUser){
     });
 
      if(!res.ok){
+        console.log(res)
         throw new Error("Erro ao fazer login");
     }
+    console.log(res)
     return res.json();
 }
 

@@ -4,31 +4,41 @@ import Link from "next/link";
 import { PiGoogleLogoBold } from "react-icons/pi";
 import { signIn } from "next-auth/react"
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { loginUserRequest } from "@/lib/RequetsApiNode";
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import Loader from "../chatbot/components/Loader";
 
+const loginSchema = z.object({
+  email: z.email("Email obrigatório."),
+  password: z.string().min(1, "Senha obrigatoria."),
+})
 
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("");
+  const router = useRouter();
+  const [loading, setIsLoading] = useState<boolean>(false)
+
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  })
 
   const handdleSingIn = () => {
     signIn('google', { callbackUrl: '/profile' })
   }
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true)
 
+    const { email, password } = data
+
     try {
-      console.log("Enviando para API:", { email, password });
       await loginUserRequest({ email, password });
+      router.push('/profile');
     } catch (error) {
       console.log(error)
     }
@@ -40,10 +50,27 @@ export default function Login() {
     <div className="h-screen">
       <div className="max-w-80 w-full mt-70 m-auto bg-gray-surface border-2  shadow-2xl  border-white p-5 rounded-2xl">
         <h3 className="text-2xl font-bold mb-3 text-black-default">Entrar</h3>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-4">
-            <InputFE onChange={(e) => setEmail(e.target.value)} className="min-h-10 p-0" label="Email" type="email" placeholder="Digite seu email" id="email" />
-            <InputFE onChange={(e) => setPassword(e.target.value)} className="min-h-10 p-0 " label="Senha" type="password" placeholder="Digite sua senha" id="email" />
+
+            <InputFE
+              {...register("email")}
+              className="min-h-10 p-0"
+              label="Email"
+              type="email"
+              isError={errors.email ? true : false}
+              placeholder={errors.email ? errors.email.message : 'Digite seu email'}
+              id="email"
+            />
+            <InputFE
+              {...register("password")}
+              className='min-h-10 p-0'
+              label="Senha"
+              type="password"
+              isError={errors.password ? true : false}
+              placeholder={errors.password ? errors.password.message : 'Digite sua senha'}
+              id="password"
+            />
           </div>
           <Link href="#" className="flex justify-end underline text-black-default text-sm">
             Esqueceu a senha?
@@ -52,7 +79,8 @@ export default function Login() {
             <button
               className="bg-primary-orange font-medium min-h-10 cursor-pointer w-full text-center text-white-default rounded-full hover:bg-primary-orange-two p-2 text-[18px]"
             >
-              Entrar
+              {!loading ? <>Entrar</> : <>Entrando...</>}
+
             </button>
             <span className="text-gray-muted-contrast">Não tem conta? <Link href="/singup" className="underline text-black-default text-sm">
               Crie uma conta

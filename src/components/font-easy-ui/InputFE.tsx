@@ -1,48 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { forwardRef, useState, InputHTMLAttributes } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-interface InputProps {
-  id: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  type?: "text" | "number" | "password" | "email";
-  placeholder?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
-  value?: string;
+  isError?: boolean;
 }
 
-export function InputFE({
+export const InputFE = forwardRef<HTMLInputElement, InputProps>(({
   label,
   type = "text",
-  placeholder,
-  onChange,
   className,
   id,
-  value,
-}: InputProps) {
+  isError = false,
+  ...props
+}, ref) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPasswordType = type === "password";
 
   return (
     <div className="w-full">
       {label && (
-        <label className="text-sm p-5 text-black-default" htmlFor={id}>
+        <label className={`p-5 text-sm ${isError ? 'text-primary-orange-two' : 'text-black-default'}`} htmlFor={id}>
           {label}
         </label>
       )}
 
       <div className="relative">
         <input
-          value={value}
-          onChange={onChange}
+          ref={ref}
           id={id}
-          className={`focus:outline-1 focus:outline-black-default focus:outline-offset-1 bg-bg-gray-muted-primary/30 text-[16px] border placeholder:text-[16px] placeholder:text-black-default border-gray-escure min-h-10 w-full pl-4 ${isPasswordType ? "pr-12" : "pr-4"} p-2 m-1 rounded-full focus:placeholder:text-black/44 ${className}`}
-
           type={isPasswordType && showPassword ? "text" : type}
-
-          placeholder={placeholder}
+          className={`focus:outline-1 ${isError ? 'border-primary-orange-two placeholder-primary-orange-two' : ' focus:outline-offset-1 placeholder:text-black-default focus:outline-black-default'}   bg-bg-gray-muted-primary/30 text-[16px] border placeholder:text-[16px]  border-gray-escure min-h-10 w-full pl-4 ${isPasswordType ? "pr-12" : "pr-4"} p-2 m-1 rounded-full  ${className}`}
+          {...props}
         />
         {isPasswordType && (
           <button
@@ -56,4 +47,6 @@ export function InputFE({
       </div>
     </div>
   );
-}
+});
+
+InputFE.displayName = "InputFE";
