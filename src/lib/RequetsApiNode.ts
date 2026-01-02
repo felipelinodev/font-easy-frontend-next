@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:5000";
+
+import { getBackendUrl } from "@/app/actions/get-env";
 
 type LoginUser = {
     email: string, 
@@ -24,6 +25,7 @@ type UserRegisterGoogle = {
 }
 
 async function loginUserRequest(data: LoginUser){
+    const API_URL = await getBackendUrl();
     const res = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: {
@@ -43,6 +45,7 @@ async function loginUserRequest(data: LoginUser){
 
 
 async function loginWithGoogleRequest(data :LoginGoogleUser) {
+    const API_URL = await getBackendUrl();
     const res = await fetch(`${API_URL}/auth/google/login`, {
         method: 'POST',
         headers: {
@@ -60,6 +63,12 @@ async function loginWithGoogleRequest(data :LoginGoogleUser) {
 
 
 async function registerUserRequest(data: UserRegister){
+    const API_URL = await getBackendUrl();
+
+
+    console.log(API_URL)
+
+    console.log(`vENDO... ${API_URL}`)
     const res = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
@@ -75,6 +84,7 @@ async function registerUserRequest(data: UserRegister){
 }
 
 async function registerGoogleUserRequest(data: UserRegisterGoogle){
+    const API_URL = await getBackendUrl();
     const res = await fetch(`${API_URL}/auth/google`, {
         method: 'POST',
         headers: {

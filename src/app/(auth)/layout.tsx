@@ -8,6 +8,8 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
 
+    const API_URL = await process.env.BACKEND_URL!;
+
     const cookiesList = await cookies();
     const authCookie = cookiesList.has("font-easy-auth");
 
@@ -15,7 +17,7 @@ export default async function RootLayout({
         return redirect("/login");
     }
 
-    const res = await fetch("http://localhost:5000/profile", {
+    const res = await fetch(`${API_URL}/profile`, {
         headers: {
             cookie: cookiesList.toString(),
         },
@@ -24,9 +26,6 @@ export default async function RootLayout({
     });
 
     if (!res.ok) {
-        console.log("Error fetching profile in layout:", res.status, res.statusText);
-        const text = await res.text();
-        console.log("Response body:", text);
         return redirect("/login");
     }
 
