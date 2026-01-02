@@ -67,7 +67,9 @@ export function DropDownMenuProfile() {
               Entrar
             </button>
             <button className=" hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full  w-full">
-              Criar conta
+              <Link href="/signup">
+                Criar conta
+              </Link>
             </button>
           </div>
         </div>

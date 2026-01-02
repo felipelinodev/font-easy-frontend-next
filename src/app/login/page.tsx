@@ -10,7 +10,6 @@ import { loginUserRequest } from "@/lib/RequetsApiNode";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import Loader from "../chatbot/components/Loader";
 
 const loginSchema = z.object({
   email: z.email("Email obrigatório."),
@@ -82,7 +81,7 @@ export default function Login() {
               {!loading ? <>Entrar</> : <>Entrando...</>}
 
             </button>
-            <span className="text-gray-muted-contrast">Não tem conta? <Link href="/singup" className="underline text-black-default text-sm">
+            <span className="text-gray-muted-contrast">Não tem conta? <Link href="/signup" className="underline text-black-default text-sm">
               Crie uma conta
             </Link> </span>
           </div>
