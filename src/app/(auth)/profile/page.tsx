@@ -1,28 +1,20 @@
-"use client";
+import { getServerSession } from "next-auth";
+import ProfileCard from "./components/ProfileCard";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-import { useProfile } from "@/app/context/ProfileContext";
-import ProfileHeader from "./components/ProfileHeader";
-import ProfileBody from "./components/ProfileBody";
 
-// import { redirect } from "next/navigation";
+export default async function Profile() {
+    const session = await getServerSession(authOptions)
 
-export default function Profile() {
-    const { user } = useProfile();
-    console.log("CLIENT PROFILE PAGE: User from context:", user);
 
-    // const session = await getServerSession()
-
-    // if (!session) {
-    //     redirect('/')
-    // }
     return (
-        <div className="m-50 flex flex-col gap-4 justify-center items-center">
-            <ProfileHeader
-                username={user?.name}
-                email={user?.email}
-                photo='/profilePreview.webp'
+        <>
+            <ProfileCard
+                name={session?.user?.name}
+                email={session?.user?.email}
+                google_id={session?.user.id}
+                photo={session?.user?.image}
             />
-            <ProfileBody username={user?.name} email={user?.email} />
-        </div>
+        </>
     )
 }

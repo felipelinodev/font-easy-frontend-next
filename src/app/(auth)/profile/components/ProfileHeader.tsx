@@ -36,7 +36,10 @@ export default function ProfileHeader({ username, email, photo }: ProfileHeaderP
                             <h4 className="text-sm text-black-default font-medium">{username}</h4>
                             <h4 className="text-sm text-gray-muted-contrast font-regular">{email}</h4>
                         </div>
-                        <LogOut size={17} className="text-gray-muted-contrast" />
+                        <Link href='/logout'>
+                            <LogOut size={17} className="text-gray-muted-contrast" />
+                        </Link>
+
                     </div>
                 </div>
                 <div className="bg-gray-muted-primary/70 p-4 flex justify-center rounded-b-2xl">

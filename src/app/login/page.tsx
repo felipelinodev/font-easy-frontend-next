@@ -2,7 +2,7 @@
 import { InputFE } from "@/components/font-easy-ui/InputFE";
 import Link from "next/link";
 import { PiGoogleLogoBold } from "react-icons/pi";
-import { signIn } from "next-auth/react"
+import { signIn, signOut } from "next-auth/react"
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUserRequest } from "@/lib/RequetsApiNode";
@@ -37,6 +37,8 @@ export default function Login() {
 
     try {
       await loginUserRequest({ email, password });
+      await signOut({ redirect: false })
+      router.refresh()
       router.push('/profile');
     } catch (error) {
       console.log(error)
