@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" data-theme="light" className="bg-[#F4F4F4]">
       <body className={`${poppins.variable} h-screen antialiased bg-[#F4F4F4]`}>
         <MainContextProvider>
           <div className="fixed z-50 top-0 right-0 left-0">

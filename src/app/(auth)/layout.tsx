@@ -1,6 +1,7 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { ProfileContextProvider } from "../context/ProfileContext";
 
 export default async function RootLayout({
     children,
@@ -29,5 +30,24 @@ export default async function RootLayout({
         return redirect("/login");
     }
 
-    return <>{children}</>
+    const text = await res.text();
+
+
+    let user;
+    try {
+        user = JSON.parse(text);
+    } catch (e) {
+        console.error("SERVER LAYOUT: Failed to parse JSON", e);
+
+        return redirect("/login");
+    }
+
+    const userData = user?.user || user;
+
+
+    return (
+        <ProfileContextProvider user={userData}>
+            {children}
+        </ProfileContextProvider>
+    )
 }

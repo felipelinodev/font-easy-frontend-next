@@ -24,6 +24,15 @@ type UserRegisterGoogle = {
   photo?: string | null;
 }
 
+
+
+type UserUpdate = {
+  name?: string;
+  email?: string;
+  password?: string;
+  photo?: string;
+}
+
 async function loginUserRequest(data: LoginUser){
     const API_URL = await getBackendUrl();
     const res = await fetch(`${API_URL}/login`, {
@@ -36,10 +45,8 @@ async function loginUserRequest(data: LoginUser){
     });
 
      if(!res.ok){
-        console.log(res)
         throw new Error("Erro ao fazer login");
     }
-    console.log(res)
     return res.json();
 }
 
@@ -65,10 +72,6 @@ async function loginWithGoogleRequest(data :LoginGoogleUser) {
 async function registerUserRequest(data: UserRegister){
     const API_URL = await getBackendUrl();
 
-
-    console.log(API_URL)
-
-    console.log(`vENDO... ${API_URL}`)
     const res = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: {
@@ -99,9 +102,28 @@ async function registerGoogleUserRequest(data: UserRegisterGoogle){
     return res.json();
 }
 
+async function updateUserRequest(data: UserUpdate){
+  const API_URL = await getBackendUrl();
+  const res = await fetch(`${API_URL}/users`,{
+    method: "PUT",
+    headers: {
+         "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data)
+  });
+
+  if(!res.ok){
+    throw new Error("Erro ao atualizar usuário");
+  }
+
+  return res.json()
+}
+
 export{ 
     loginUserRequest,
     loginWithGoogleRequest,
     registerUserRequest,
-    registerGoogleUserRequest
+    registerGoogleUserRequest,
+    updateUserRequest
 }
