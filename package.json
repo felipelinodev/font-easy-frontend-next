@@ -22,7 +22,7 @@
     "@tiptap/suggestion": "^3.10.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "gsap": "^3.14.1",
+    "gsap": "^3.14.2",
     "lucide-react": "^0.548.0",
     "next": "^16.0.8",
     "next-auth": "^4.24.13",

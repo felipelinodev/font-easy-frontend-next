@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { CardInfos } from "./components/CardInfos";
 import { CardsArticles } from "./components/CardArticles";
 import TextType from "@/components/TextType";
+import SplitText from "@/components/SplitText";
+
 import { CardAtributesPreview } from "./components/CardAtributesPreview";
 import Image from "next/image";
 import { InputFE } from "@/components/font-easy-ui/InputFE";
@@ -39,6 +41,7 @@ export default function Home() {
           showCursor={true}
           cursorCharacter="|"
         />
+
         {/* </p> */}
         <button
           onClick={handleRedirect}
@@ -77,9 +80,24 @@ export default function Home() {
       </div>
       <section className="rounded-t-4xl max-h-[1063.72px] w-full bg-white-default/35">
         <article className="flex items-center flex-col">
-          <h1 className="text-4xl font-bold p-11 text-primary-orange">
+          {/* <h1 className="text-4xl font-bold p-11 text-primary-orange">
             Sobre nós
-          </h1>
+          </h1> */}
+          <SplitText
+            text="Sobre nós"
+            className="text-4xl font-bold p-11 text-primary-orange"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+
+          />
+
           <p className="text-2xl font-normal text-black-default max-w-[574px] text-center">
             Somos uma plataforma que permite escolher fontes de forma inovadora,
             com o uso de inteligência artificial.
