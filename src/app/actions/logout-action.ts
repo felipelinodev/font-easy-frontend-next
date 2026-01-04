@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 
 export async function DeleteCookie() {
     try {
@@ -10,5 +9,4 @@ export async function DeleteCookie() {
     } catch (error) {
         console.log('Erro ao fazer logout')
     }
-    redirect('/login')
 }
