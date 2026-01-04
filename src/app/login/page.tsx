@@ -38,7 +38,6 @@ export default function Login() {
     try {
       await loginUserRequest({ email, password });
       await signOut({ redirect: false })
-      router.refresh()
       router.push('/profile');
     } catch (error) {
       console.log(error)
