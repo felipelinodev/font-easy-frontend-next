@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { ProfileContextProvider } from "../context/ProfileContext";
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export default async function RootLayout({
     children,

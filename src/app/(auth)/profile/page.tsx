@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import ProfileCard from "./components/ProfileCard";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 
 export default async function Profile() {
