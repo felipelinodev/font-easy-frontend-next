@@ -37,8 +37,9 @@ export default function Login() {
 
     try {
       await loginUserRequest({ email, password });
-      // await signOut({ redirect: false })
-      window.location.href = '/profile';
+      await signOut({ redirect: false })
+      router.push('/profile');
+      router.refresh();
     } catch (error) {
       console.log(error)
     }
