@@ -33,11 +33,11 @@ export default function Login() {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true)
 
-    const { email, password } = data
+    const { email, password } = data;
 
     try {
       await loginUserRequest({ email, password });
-      await signOut({ redirect: false })
+      // await signOut({ redirect: false })
       window.location.href = '/profile';
     } catch (error) {
       console.log(error)
