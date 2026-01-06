@@ -1,9 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-   images: {
+  images: {
     domains: ['lh3.googleusercontent.com'],
   },
+  
+  // 👇 Adicione isso
+  async rewrites() {
+    return [
+      {
+        source: '/api/backend/:path*',
+        destination: 'https://font-easy-user-management.vercel.app/:path*',
+      },
+    ];
+  },
+  
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.(".svg")
@@ -13,12 +24,12 @@ const nextConfig: NextConfig = {
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         use: ["@svgr/webpack"],
       }
     );
