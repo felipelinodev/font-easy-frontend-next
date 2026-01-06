@@ -25,13 +25,12 @@ export default async function RootLayout({
     if (session) {
         userData = session.user
     } else {
-        const cookieHeader = cookiesList.getAll().map(c => `${c.name}=${c.value}`).join('; ');
-
         const res = await fetch(`${API_URL}/profile`, {
             headers: {
-                cookie: cookieHeader,
+                cookie: cookiesList.toString(),
             },
             cache: 'no-store',
+            credentials: 'include',
         });
 
         if (!res.ok) { return redirect("/login"); }
