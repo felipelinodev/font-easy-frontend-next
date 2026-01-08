@@ -1,59 +1,59 @@
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-import { ProfileContextProvider } from "../context/ProfileContext";
+// import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
+// import { ProfileContextProvider } from "../context/ProfileContext";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "@/lib/auth";
 
-export default async function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+// export default async function RootLayout({
+//     children,
+// }: {
+//     children: React.ReactNode;
+// }) {
 
-    const API_URL = process.env.BACKEND_URL!;
+//     const API_URL = process.env.BACKEND_URL!;
 
-    // pega a sessão do googel meu fi
-    const session = await getServerSession(authOptions);
-    const cookiesList = await cookies();
-    const authCookie = cookiesList.has("font-easy-auth");
+//     // pega a sessão do googel meu fi
+//     const session = await getServerSession(authOptions);
+//     const cookiesList = await cookies();
+//     const authCookie = cookiesList.has("font-easy-auth");
 
-    if (!authCookie && !session) { return redirect("/login"); }
+//     if (!authCookie && !session) { return redirect("/login"); }
 
-    let userData;
+//     let userData;
 
-    if (session) {
-        userData = session.user
-    } else {
-        const res = await fetch(`${API_URL}/profile`, {
-            headers: {
-                cookie: cookiesList.toString(),
-            },
-            cache: 'no-store',
-            credentials: 'include',
-        });
+//     if (session) {
+//         userData = session.user
+//     } else {
+//         const res = await fetch(`${API_URL}/profile`, {
+//             headers: {
+//                 cookie: cookiesList.toString(),
+//             },
+//             cache: 'no-store',
+//             credentials: 'include',
+//         });
 
-        if (!res.ok) { return redirect("/login"); }
+//         if (!res.ok) { return redirect("/login"); }
 
-        const text = await res.text();
+//         const text = await res.text();
 
-        let user;
+//         let user;
 
-        try {
-            user = JSON.parse(text);
-        } catch (e) {
-            return redirect("/login");
-        }
+//         try {
+//             user = JSON.parse(text);
+//         } catch (e) {
+//             return redirect("/login");
+//         }
 
-        userData = user?.user || user;
-    }
-
-
+//         userData = user?.user || user;
+//     }
 
 
-    return (
-        <ProfileContextProvider user={userData}>
-            {children}
-        </ProfileContextProvider>
-    )
-}
+
+
+//     return (
+//         <ProfileContextProvider user={userData}>
+//             {children}
+//         </ProfileContextProvider>
+//     )
+// }
