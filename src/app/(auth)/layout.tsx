@@ -44,6 +44,7 @@ export default async function RootLayout({
 
     userData = user?.user || user;
 
+    console.log(userData)
 
     return (
         <ProfileContextProvider user={userData}>
