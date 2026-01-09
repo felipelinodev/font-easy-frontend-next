@@ -16,6 +16,7 @@ export type UserProfile = {
 interface ProfileContextType {
     user: UserProfile | null;
     setUser: (user: UserProfile | null) => void
+    token?: string;
 }
 
 export const ProfileContext = createContext<ProfileContextType | null>(null);
@@ -23,14 +24,16 @@ export const ProfileContext = createContext<ProfileContextType | null>(null);
 export function ProfileContextProvider({
     children,
     user: initialUser,
+    token,
 }: {
     children: React.ReactNode;
     user: UserProfile | null;
+    token?: string;
 }) {
 
     const [user, setUser] = useState<UserProfile | null>(initialUser);
     return (
-        <ProfileContext.Provider value={{ user, setUser }}>
+        <ProfileContext.Provider value={{ user, setUser, token }}>
             {children}
         </ProfileContext.Provider>
     );

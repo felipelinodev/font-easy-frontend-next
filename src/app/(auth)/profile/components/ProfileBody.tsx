@@ -20,7 +20,7 @@ const updateProfileSchema = z.object({
 type UpdateFormValues = z.infer<typeof updateProfileSchema>
 
 export default function ProfileBody({ username, email }: ProfileBodyProps) {
-    const { setUser, user } = useProfile();
+    const { setUser, user, token } = useProfile();
 
     const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<UpdateFormValues>({
         resolver: zodResolver(updateProfileSchema),
@@ -34,7 +34,8 @@ export default function ProfileBody({ username, email }: ProfileBodyProps) {
         const { name, email } = data
 
         try {
-            await updateUserRequest({ name, email })
+
+            await updateUserRequest({ name, email }, token!)
 
             if (user) {
                 setUser({ ...user, ...data })

@@ -51,7 +51,7 @@ export default async function RootLayout({
 
 
     return (
-        <ProfileContextProvider user={userData}>
+        <ProfileContextProvider user={userData} token={authCookie}>
             {children}
         </ProfileContextProvider>
     )
