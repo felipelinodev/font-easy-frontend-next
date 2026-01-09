@@ -10,6 +10,7 @@ import { loginUserRequest } from "@/lib/RequetsApiNode";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { SetCookieWithToken } from "../actions/auth-action";
 
 const loginSchema = z.object({
   email: z.email("Email obrigatório."),
@@ -36,10 +37,10 @@ export default function Login() {
     const { email, password } = data;
 
     try {
-      await loginUserRequest({ email, password });
-      // await signOut({ redirect: false })
-      // router.push('/profile');
-      // router.refresh();
+      const tokenResponse = await loginUserRequest({ email, password });
+      await signOut({ redirect: false })
+      await SetCookieWithToken(tokenResponse.tokenAuth)
+
       window.location.href = '/profile';
     } catch (error) {
       console.log(error)

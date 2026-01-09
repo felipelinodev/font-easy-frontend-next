@@ -16,35 +16,39 @@ export default async function RootLayout({
     // pega a sessão do googel meu fi
     const session = await getServerSession(authOptions);
     const cookiesList = await cookies();
-    const authCookie = cookiesList.has("font-easy-auth");
+    const authCookie = cookiesList.get("font-easy-auth")?.value;
 
-    // if (!authCookie && !session) { return redirect("/login"); }
+    if (!authCookie && !session) { return redirect("/login"); }
 
     let userData;
 
-
-    const res = await fetch(`${API_URL}/profile`, {
-        headers: {
-            cookie: cookiesList.toString(),
-        },
-        cache: 'no-store',
-        credentials: 'include',
-    });
+    if (session) {
+        userData = session.user
+    } else {
 
 
-    const text = await res.text();
+        const res = await fetch(`${API_URL}/profile`, {
+            headers: {
+                Authorization: `Bearer ${authCookie}`
+            },
+            cache: 'no-store',
+        });
 
-    let user;
+        if (!res.ok) { return redirect("/login"); }
 
-    try {
-        user = JSON.parse(text);
-    } catch (e) {
+        const text = await res.text();
 
+        let user;
+
+        try {
+            user = JSON.parse(text);
+        } catch (e) {
+            return redirect("/login");
+        }
+
+        userData = user?.user || user;
     }
 
-    userData = user?.user || user;
-
-    console.log(userData)
 
     return (
         <ProfileContextProvider user={userData}>

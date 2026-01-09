@@ -40,7 +40,6 @@ async function loginUserRequest(data: LoginUser){
         headers: {
             "Content-Type": "application/json",
         },
-    credentials: "include",
     body: JSON.stringify(data)
     });
 
@@ -58,7 +57,6 @@ async function loginWithGoogleRequest(data :LoginGoogleUser) {
         headers: {
             "Content-Type": "application/json",
         },
-    credentials: "include",
     body: JSON.stringify(data)
     });
 
@@ -102,14 +100,14 @@ async function registerGoogleUserRequest(data: UserRegisterGoogle){
     return res.json();
 }
 
-async function updateUserRequest(data: UserUpdate){
+async function updateUserRequest(data: UserUpdate, token: string){
   const API_URL = await getBackendUrl();
   const res = await fetch(`${API_URL}/users`,{
     method: "PUT",
     headers: {
-         "Content-Type": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
     },
-    credentials: "include",
     body: JSON.stringify(data)
   });
 
