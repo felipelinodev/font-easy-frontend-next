@@ -40,6 +40,7 @@ export default function Login() {
       // await signOut({ redirect: false })
       // router.push('/profile');
       // router.refresh();
+      window.location.href = '/profile';
     } catch (error) {
       console.log(error)
     }
