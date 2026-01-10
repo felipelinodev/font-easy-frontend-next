@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { registerUserRequest, loginUserRequest } from "@/lib/RequetsApiNode";
+import { SetCookieWithToken } from "../actions/auth-action";
 
 const signupSchema = z.object({
   name: z.string().min(1, "É necessário adicionar um nome.").min(2),
@@ -19,7 +20,6 @@ const signupSchema = z.object({
 type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function SignUp() {
-  const router = useRouter();
   const [loading, setIsLoading] = useState<boolean>(false)
 
   const { register, handleSubmit, formState: { errors } } = useForm<SignupFormValues>({
@@ -33,8 +33,12 @@ export default function SignUp() {
 
     try {
       await registerUserRequest({ name, email, password })
-      await loginUserRequest({ email, password })
-      router.push('/profile');
+
+      const tokenResponse = await loginUserRequest({ email, password })
+
+      await SetCookieWithToken(tokenResponse.tokenAuth)
+
+      window.location.href = '/profile'
     } catch (error) {
       console.log(error)
     }
