@@ -81,7 +81,7 @@ export function DropDownMenuProfileAuth() {
                   <li>
                     <Link
                       className="block px-3 text-base hover:bg-gray-escure/50 py-1 text-black-default"
-                      href="#"
+                      href="/favorite_fonts"
                     >
                       Fontes Favoritas
                     </Link>

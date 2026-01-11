@@ -43,7 +43,7 @@ export default function ProfileHeader({ username, email, photo }: ProfileHeaderP
                     </div>
                 </div>
                 <div className="bg-gray-muted-primary/70 p-4 flex justify-center rounded-b-2xl">
-                    <Link href="#" className="text-sm underline flex gap-1 items-center text-black-default font-medium">
+                    <Link href="/favorite_fonts" className="text-sm underline flex gap-1 items-center text-black-default font-medium">
                         Fontes favoritas <ExternalLink size={17} />
                     </Link>
                 </div>

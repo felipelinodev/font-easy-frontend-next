@@ -4,6 +4,7 @@ import { ProfileContextProvider } from "../context/ProfileContext";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getFavoriteFont } from "@/lib/RequetsApiNode";
 
 export default async function RootLayout({
     children,
@@ -21,9 +22,19 @@ export default async function RootLayout({
     if (!authCookie && !session) { return redirect("/login"); }
 
     let userData;
+    let favoriteFonts;
+
+
+
 
     if (session) {
         userData = session.user
+        try {
+            const response = await getFavoriteFont(authCookie!)
+            favoriteFonts = response
+        } catch (error) {
+            console.log(error)
+        }
     } else {
 
 
@@ -47,11 +58,17 @@ export default async function RootLayout({
         }
 
         userData = user?.user || user;
+        try {
+            const response = await getFavoriteFont(authCookie!)
+            favoriteFonts = response
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
     return (
-        <ProfileContextProvider user={userData} token={authCookie}>
+        <ProfileContextProvider user={userData} token={authCookie} favoriteFonts={favoriteFonts}>
             {children}
         </ProfileContextProvider>
     )

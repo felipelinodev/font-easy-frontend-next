@@ -3,7 +3,7 @@
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
 import { useContext, useEffect, useState } from "react";
-import { RequestFontEasy } from "@/lib/RequestFontEasy";  
+import { RequestFontEasy } from "@/lib/RequestFontEasy";
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
 import RangeInput from "./components/RangeInput";
@@ -141,9 +141,8 @@ export default function ChatBot() {
               {!loading ? (
                 <>
                   <div
-                    className={` ${
-                      keywords.length > 0 ? "block" : "hidden"
-                    } mx-5 my-2`}
+                    className={` ${keywords.length > 0 ? "block" : "hidden"
+                      } mx-5 my-2`}
                   >
                     <RangeSlider
                       min={0}
