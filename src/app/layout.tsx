@@ -7,6 +7,7 @@ import { FloatingMenu } from "@/app/components/FloatingMenu";
 import { Footer } from "@/app/components/Footer";
 import { Providers } from "@/app/components/Providers";
 import { cookies } from "next/headers";
+import { getFavoriteFont } from "@/lib/RequetsApiNode";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -39,11 +40,19 @@ export default async function RootLayout({
     } catch (e) { }
   }
 
+  let favoriteFonts
+  try {
+    const response = await getFavoriteFont(authCookie!)
+    favoriteFonts = response
+  } catch (error) {
+    console.log(error)
+  }
+
   return (
     <html lang="pt-br" data-theme="light" className="bg-[#F4F4F4]">
       <body className={`${poppins.variable} h-screen antialiased bg-[#F4F4F4]`}>
         <Providers>
-          <ProfileContextProvider user={userData} token={authCookie}>
+          <ProfileContextProvider user={userData} token={authCookie} favoriteFonts={favoriteFonts}>
             <MainContextProvider>
               <div className="fixed z-50 top-0 right-0 left-0">
                 <FloatingMenu />
