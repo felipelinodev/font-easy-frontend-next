@@ -21,12 +21,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  // Pega o cookie de auth
+
   const cookiesList = await cookies();
   const authCookie = cookiesList.get("font-easy-auth")?.value;
 
-  // Busca dados do usuario se tiver cookie
   let userData = null;
+  let favoriteFonts
+
   if (authCookie) {
     try {
       const res = await fetch(`${process.env.BACKEND_URL}/profile`, {
@@ -38,15 +39,19 @@ export default async function RootLayout({
         userData = data?.user || data;
       }
     } catch (e) { }
+
+    try {
+      const response = await getFavoriteFont(authCookie!)
+      favoriteFonts = response
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  let favoriteFonts
-  try {
-    const response = await getFavoriteFont(authCookie!)
-    favoriteFonts = response
-  } catch (error) {
-    console.log(error)
-  }
+
+
+
+
 
   return (
     <html lang="pt-br" data-theme="light" className="bg-[#F4F4F4]">
