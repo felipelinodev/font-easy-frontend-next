@@ -24,7 +24,7 @@ interface ProfileContextType {
     user: UserProfile | null;
     setUser: (user: UserProfile | null) => void
     token?: string;
-
+    setToken: (token: string) => void
     favoriteFonts: FavoriteFont[];
     setFavoriteFonts: (fonts: FavoriteFont[]) => void;
 }
@@ -34,7 +34,7 @@ export const ProfileContext = createContext<ProfileContextType | null>(null);
 export function ProfileContextProvider({
     children,
     user: initialUser,
-    token,
+    token: initialToken,
     favoriteFonts: initialFavoriteFonts = [],
 }: {
     children: React.ReactNode;
@@ -44,11 +44,11 @@ export function ProfileContextProvider({
 }) {
 
     const [user, setUser] = useState<UserProfile | null>(initialUser);
-
+    const [token, setToken] = useState<string | undefined>(initialToken)
     const [favoriteFonts, setFavoriteFonts] = useState<FavoriteFont[]>(initialFavoriteFonts)
 
     return (
-        <ProfileContext.Provider value={{ user, setUser, token, favoriteFonts, setFavoriteFonts }}>
+        <ProfileContext.Provider value={{ user, setUser, token, setToken, favoriteFonts, setFavoriteFonts }}>
             {children}
         </ProfileContext.Provider>
     );

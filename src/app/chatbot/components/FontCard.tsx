@@ -3,7 +3,7 @@ import { useProfile } from "@/app/context/ProfileContext";
 import { createFavoriteFont } from "@/lib/RequetsApiNode";
 import { Download, Heart } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "./Loader";
 
 
@@ -39,6 +39,7 @@ export const FontCard = ({
   fontIdUnique,
 }: FontCardProps) => {
   const { token } = useProfile();
+
   const [heartClick, setHeartClick] = useState<string>("empty")
   const [loadingSaveFont, setLoadingSaveFont] = useState<boolean>(false)
 
@@ -52,11 +53,11 @@ export const FontCard = ({
     const currentHeartClick = heartClick === "fill" ? "empty" : "fill";
     setHeartClick(currentHeartClick)
 
-
+    console.log(token)
     if (!token) {
       return
-    }
 
+    }
 
     const fontData: FavoriteFont = {
       font_name: fontName,
@@ -82,7 +83,9 @@ export const FontCard = ({
     }
   }
 
-
+  useEffect(() => {
+    console.log("O token chegou no FontCard:", token);
+  }, [token]);
 
   return (
     <>

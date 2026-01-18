@@ -13,6 +13,7 @@ import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
 import { MainContext } from "../context/MainContext";
 import { JSONContent } from "@tiptap/core";
+import TextType from "@/components/TextType";
 
 type WordsAndsWeightProps = {
   word: string;

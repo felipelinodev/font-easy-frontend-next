@@ -29,6 +29,7 @@ export default async function RootLayout({
 
     if (session) {
         userData = session.user
+
         try {
             const response = await getFavoriteFont(authCookie!)
             favoriteFonts = response

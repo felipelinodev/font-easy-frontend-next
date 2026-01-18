@@ -4,7 +4,9 @@ import { useProfile } from "@/app/context/ProfileContext";
 import ProfileHeader from "./ProfileHeader";
 import ProfileBody from "./ProfileBody";
 import { useEffect } from "react";
-import { registerGoogleUserRequest } from "@/lib/RequetsApiNode";
+import { loginWithGoogleRequest, registerGoogleUserRequest } from "@/lib/RequetsApiNode";
+import { SetCookieWithToken } from "@/app/actions/auth-action";
+
 
 type GoogleOAuthSchema = {
     name?: string | null | undefined;
@@ -15,7 +17,7 @@ type GoogleOAuthSchema = {
 
 
 export default function ProfileCard({ name, email, google_id, photo }: GoogleOAuthSchema) {
-    const { user } = useProfile();
+    const { user, setToken } = useProfile();
 
     useEffect(() => {
         const syncGoogleUser = async () => {
@@ -27,6 +29,11 @@ export default function ProfileCard({ name, email, google_id, photo }: GoogleOAu
                         google_id: google_id ?? "",
                         photo: photo ?? ""
                     });
+
+                    const res = await loginWithGoogleRequest({ google_id })
+                    await SetCookieWithToken(res.tokenAuth);
+                    setToken(res.tokenAuth)
+
                 } catch (error) {
                     console.log(error)
                 }
@@ -34,8 +41,6 @@ export default function ProfileCard({ name, email, google_id, photo }: GoogleOAu
         }
         syncGoogleUser()
     }, [google_id])
-
-
     return (
         <div className="m-50 flex flex-col gap-4 justify-center items-center">
             {google_id ? (

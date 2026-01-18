@@ -20,7 +20,6 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
-  const router = useRouter();
   const [loading, setIsLoading] = useState<boolean>(false)
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
