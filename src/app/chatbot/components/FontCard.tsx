@@ -56,7 +56,6 @@ export const FontCard = ({
     console.log(token)
     if (!token) {
       return
-
     }
 
     const fontData: FavoriteFont = {
@@ -82,10 +81,6 @@ export const FontCard = ({
 
     }
   }
-
-  useEffect(() => {
-    console.log("O token chegou no FontCard:", token);
-  }, [token]);
 
   return (
     <>
