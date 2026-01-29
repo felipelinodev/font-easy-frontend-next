@@ -7,8 +7,8 @@ import {
   ChatInputSubmitButton,
 } from "@/components/ui/chat-input";
 import { JSONContent } from "@tiptap/core";
-import { Plus } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { Plus, ScanSearch, Search } from "lucide-react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 type WordsAndsWeightProps = {
   word: string;
@@ -32,6 +32,14 @@ export function TextAreaInput({
   draftWeight,
   SetKeywords,
 }: TextAreaProps) {
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handdleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
+
   const handdleWords = () => {
     const randomNumber: number = Math.floor(Math.random() * 10000);
     SetKeywords((prevWords: WordsAndsWeightProps[]) => [
@@ -54,8 +62,34 @@ export function TextAreaInput({
             onChange={(v: JSONContent) => handleChange(v)}
             className="text-[#1E1E1C] bg-transparent border-gray-escure rounded-2xl"
           >
-            <ChatInputEditor placeholder="Digite um prompt de recomendação ou um atributo." />
-            <ChatInputGroupAddon align="block-end">
+            <ChatInputEditor
+              placeholder="Digite aqui"
+            />
+            <ChatInputGroupAddon align="block-end" className="flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={handdleOpen}
+                  className="flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-gray-escure transition-colors"
+                >
+                  <Plus size={18} className="text-black-default" />
+                </button>
+                {isOpen && (
+                  <div className="absolute bottom-10 left-0 z-20 w-48 rounded-2xl bg-gray-surface border-2 shadow-xl border-white p-2">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center rounded-sm gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-muted-primary/75 cursor-pointer transition-colors"
+                    >
+                      <Search size={18} /> Search
+                    </button>
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="flex rounded-sm items-center gap-2 w-full px-4 py-2 hover:bg-gray-muted-primary/75 text-sm text-gray-700 hover:bg- cursor-pointer transition-colors"
+                    >
+                      <ScanSearch size={18} /> Search Image
+                    </button>
+                  </div>
+                )}
+              </div>
               <ChatInputSubmitButton
                 disabled={!draftWord || draftWord.length === 0}
                 className="ml-auto bg-amber-500 disabled:text-white-default hover:bg-orange-600 disabled:opacity-100 cursor-pointer disabled:bg-gray-escure"
@@ -68,9 +102,9 @@ export function TextAreaInput({
               className="ml-auto flex items-center disabled:border-gray-escure mr-3 border rounded-full  border-primary-orange justify-center h-8 w-8 cursor-pointer"
             >
               {!draftWord || draftWord.length === 0 ? (
-                <Plus className="text-gray-escure rounded-full" />
+                <span className="text-gray-escure rounded-full textarea-[20px]">@</span>
               ) : (
-                <Plus className="text-amber-500 rounded-full" />
+                <span className="text-amber-500 rounded-full textarea-[20px]">@</span>
               )}
             </button>
           </ChatInput>

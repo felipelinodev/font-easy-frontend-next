@@ -8,6 +8,9 @@ import { Footer } from "@/app/components/Footer";
 import { Providers } from "@/app/components/Providers";
 import { cookies } from "next/headers";
 import { getFavoriteFont } from "@/lib/RequetsApiNode";
+import Link from "next/link";
+
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -62,7 +65,8 @@ export default async function RootLayout({
               <div className="fixed z-50 top-0 right-0 left-0">
                 <FloatingMenu />
               </div>
-
+              <Link href="/chatbot" className="flex items-center justify-center fixed bottom-10 right-10 w-16 h-16 rounded-full bg-primary-orange bg-[url(/LogoOnly.png)] bg-no-repeat bg-size-[60%] bg-center shadow-lg z-50 hover:scale-105 transition-transform duration-300">
+              </Link>
               {children}
               <Footer />
             </MainContextProvider>
