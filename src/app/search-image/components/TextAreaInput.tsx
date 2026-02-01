@@ -18,19 +18,13 @@ type WordsAndsWeightProps = {
   selected?: boolean;
 };
 
-type activeToolType = 'search' | 'search Image' | null;
-
 type TextAreaProps = {
   handleSubmit: () => void;
   handleChange: (value: JSONContent) => void;
   draftWord: string;
   draftWeight: number;
   SetKeywords: Dispatch<SetStateAction<WordsAndsWeightProps[]>>;
-  activeTool: activeToolType
-  setActiveTool: (tool: activeToolType) => void
 };
-
-
 
 export function TextAreaInput({
   handleSubmit,
@@ -38,12 +32,9 @@ export function TextAreaInput({
   draftWord,
   draftWeight,
   SetKeywords,
-  activeTool,
-  setActiveTool
 }: TextAreaProps) {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
 
   const handdleOpen = () => {
     setIsOpen(!isOpen);
@@ -76,23 +67,16 @@ export function TextAreaInput({
               placeholder="Digite aqui"
             />
             <ChatInputGroupAddon align="block-end" className="flex items-center gap-2">
-              <div className="flex items-center gap-2">
-                {activeTool === 'search' && (
-                  <div className="flex gap-1.5 items-center bg-gray-escure text-black-default px-3 py-1.5 rounded-full text-sm">
-                    <Search size={14} /> Search
-                  </div>
+              <div className="relative">
+                <button
+                  onClick={handdleOpen}
+                  className="flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-gray-escure transition-colors"
+                >
+                  <Plus size={18} className="text-black-default" />
+                </button>
+                {isOpen && (
+                  <DropDownContextMenu setIsOpen={setIsOpen} />
                 )}
-                <div className="relative">
-                  <button
-                    onClick={handdleOpen}
-                    className="flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-gray-escure transition-colors"
-                  >
-                    <Plus size={18} className="text-black-default" />
-                  </button>
-                  {isOpen && (
-                    <DropDownContextMenu setIsOpen={setIsOpen} setActiveTool={setActiveTool} activeTool={activeTool} />
-                  )}
-                </div>
               </div>
               <ChatInputSubmitButton
                 disabled={!draftWord || draftWord.length === 0}

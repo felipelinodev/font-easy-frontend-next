@@ -1,73 +1,54 @@
-import { UserRound } from "lucide-react";
-import Link from "next/link";
+import { Check, ScanSearch, Search, UserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { useEffect, useRef, useState } from "react";
+type activeToolType = 'search' | 'search Image' | null;
 
-export function DropDownContextMenu() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const areRef = useRef<HTMLDivElement>(null);
+type DropDownContextMenuProps = {
+    setIsOpen: (isOpen: boolean) => void;
+    setActiveTool: (activeTool: activeToolType) => void
+    activeTool: activeToolType;
+}
 
-    const router = useRouter();
 
-    const handleLogin = () => {
-        router.push("/login");
-    };
+export function DropDownContextMenu({ setIsOpen, setActiveTool, activeTool }: DropDownContextMenuProps) {
 
-    const handdleOpen = () => {
-        setIsOpen(!isOpen);
-    };
+    const router = useRouter()
 
-    useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-            if (areRef.current) {
-                const target = e.target as Node;
+    const handleSearchImage = () => {
+        setIsOpen(false)
+        router.push('/search-image')
+    }
 
-                if (!areRef.current.contains(target)) {
-                    setIsOpen(false);
-                }
-            }
-        };
+    const handleSearch = () => {
+        if (activeTool === 'search') {
+            setActiveTool(null)
+        } else {
+            setActiveTool('search')
+        }
 
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+        setIsOpen(false)
+    }
 
     return (
-        <div ref={areRef} className="flex text-black-default flex-col items-center">
-            <div
-                onClick={handdleOpen}
-                className="h-8 w-8  bg-gray-escure rounded-full flex items-center justify-center"
+        <div className="absolute bottom-10 left-0 z-20 w-48 rounded-2xl bg-gray-surface border-2 shadow-xl border-white p-2">
+            <p className="py-3 ml-4 text-sm flex text-black-default border-t-rounded-2xl border-b border-b-gray-escure">
+                Ferramentas
+            </p>
+            <button
+                onClick={handleSearch}
+                className="flex items-center justify-between rounded-sm  w-full px-4 py-2 text-sm text-black-default hover:bg-gray-muted-primary/75 cursor-pointer transition-colors"
             >
-                <UserRound size={18} />
-            </div>
-            {isOpen && (
-                <div
-                    id="drow-down"
-                    className="absolute z-10 w-full max-w-[177.33px] top-24 rounded-2xl bg-gray-surface border-2 shadow-xl border-white"
-                >
-
-                    <p className="text-sm max-w-28 pl-3 pt-2">
-                        Seach
-                    </p>
-                    <div className="p-2">
-                        <button
-                            onClick={handleLogin}
-                            className="border mb-1 hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full border-gray-escure w-full"
-                        >
-                            Entrar
-                        </button>
-                        <button className=" hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full  w-full">
-                            <Link href="/signup">
-                                Criar conta
-                            </Link>
-                        </button>
-                    </div>
+                <div className="flex gap-2 items-center">
+                    <Search size={18} /> Search
                 </div>
-            )}
+                {activeTool === 'search' ? <Check size={18} /> : ''}
+            </button>
+            <button
+                onClick={handleSearchImage}
+                className="flex rounded-sm items-center gap-2 w-full px-4 py-2 hover:bg-gray-muted-primary/75 text-sm text-black-default cursor-pointer transition-colors"
+            >
+                <ScanSearch size={18} /> Search Image
+            </button>
         </div>
     );
 }

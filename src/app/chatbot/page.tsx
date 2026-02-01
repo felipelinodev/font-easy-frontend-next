@@ -3,7 +3,7 @@
 import { CompontsWapperCard } from "@/app/chatbot/components/CompontsWapperCard";
 import { TextAreaInput } from "./components/TextAreaInput";
 import { useContext, useEffect, useState } from "react";
-import { RequestFontEasy } from "@/lib/RequestFontEasy";
+import { RequestFontEasyTextual, RequestFontEasyStructured, RequestFontEasyByName } from "@/lib/RequestFontEasy";
 import RangeSlider from "./components/RangeSlider";
 import { FontCard } from "./components/FontCard";
 import RangeInput from "./components/RangeInput";
@@ -13,7 +13,6 @@ import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
 import { MainContext } from "../context/MainContext";
 import { JSONContent } from "@tiptap/core";
-import TextType from "@/components/TextType";
 
 type WordsAndsWeightProps = {
   word: string;
@@ -21,6 +20,8 @@ type WordsAndsWeightProps = {
   id: number;
   selected?: boolean;
 };
+
+type activeToolType = 'search' | 'search Image' | null;
 
 export default function ChatBot() {
   const [draftWord, setdraftWord] = useState<string>("");
@@ -40,14 +41,38 @@ export default function ChatBot() {
 
   const [keywords, SetKeywords] = useState<WordsAndsWeightProps[]>([]);
 
+  const [activeTool, setActiveTool] = useState<activeToolType>(null)
+
   const handleChange = (value: JSONContent) => {
     const inputText = value.content?.[0]?.content?.[0]?.text ?? "";
 
     setdraftWord(inputText);
   };
 
+  const toTitleCase = (text: string): string => {
+    return text
+      .split(/\s+/)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  };
+
   const handleSubmit = async (): Promise<void> => {
     setLoading(true);
+
+
+    if (activeTool === 'search') {
+      try {
+        const fontName = toTitleCase(draftWord);
+        const response = await RequestFontEasyByName(fontName);
+        setFonts(response ? [response] : []);
+        console.log(fonts)
+      } catch (error) {
+        console.error('Erro ao buscar fonte por nome:', error);
+        setFonts([]);
+      }
+      setLoading(false);
+      return;
+    }
 
     if (keywords.length > 0) {
       const momentPrompt = keywords.reduce(
@@ -59,20 +84,11 @@ export default function ChatBot() {
       );
 
       const normalizePrompt = normalizeTo100(momentPrompt);
-
-      const userBodyResquestStructured = {
-        prompt: normalizePrompt,
-      };
-
-      const response = await RequestFontEasy(userBodyResquestStructured);
-      setFonts(response.response?.fonts);
+      const response = await RequestFontEasyStructured(normalizePrompt);
+      setFonts(response?.response?.fonts || []);
     } else {
-      const userBodyResquest = {
-        prompt: draftWord,
-      };
-
-      const response = await RequestFontEasy(userBodyResquest);
-      setFonts(response.response?.fonts);
+      const response = await RequestFontEasyTextual(draftWord);
+      setFonts(response?.response?.fonts || []);
     }
     setLoading(false);
   };
@@ -122,6 +138,8 @@ export default function ChatBot() {
                 draftWord={draftWord}
                 draftWeight={draftWeight}
                 SetKeywords={SetKeywords}
+                setActiveTool={setActiveTool}
+                activeTool={activeTool}
               />
 
               <div className="pr-5 pl-5 flex flex-wrap w-[864.98px]">
@@ -183,7 +201,7 @@ export default function ChatBot() {
                 fonts?.map((f) => (
                   <FontCard
                     fontIdUnique={f.font_id}
-                    key={f.rank}
+                    key={f.font_id}
                     fontName={f.name}
                     fontVariations={f.font_variation}
                     fontsDownloadLinks={f.files}
