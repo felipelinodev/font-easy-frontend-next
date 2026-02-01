@@ -18,6 +18,8 @@ type WordsAndsWeightProps = {
   selected?: boolean;
 };
 
+type activeToolType = 'search' | 'search Image' | null;
+
 type TextAreaProps = {
   handleSubmit: () => void;
   handleChange: (value: JSONContent) => void;
@@ -35,6 +37,7 @@ export function TextAreaInput({
 }: TextAreaProps) {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [activeTool, setActiveTool] = useState<activeToolType>(null);
 
   const handdleOpen = () => {
     setIsOpen(!isOpen);
@@ -75,7 +78,7 @@ export function TextAreaInput({
                   <Plus size={18} className="text-black-default" />
                 </button>
                 {isOpen && (
-                  <DropDownContextMenu setIsOpen={setIsOpen} />
+                  <DropDownContextMenu setIsOpen={setIsOpen} setActiveTool={setActiveTool} activeTool={activeTool} />
                 )}
               </div>
               <ChatInputSubmitButton
