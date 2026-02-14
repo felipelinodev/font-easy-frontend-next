@@ -59,7 +59,7 @@ export default function FontPage() {
      `}
       </style>
       <div className="flex gap-5 mt-32 mb-10  items-center flex-col justify-center">
-        <CompontsWapperCard>
+        <CompontsWapperCard shouldAnimate={false}>
           <div className="p-10">
             <div className="flex items-center justify-between border-b pb-4 border-black-default">
               <div className="flex items-center gap-6">
@@ -89,7 +89,7 @@ export default function FontPage() {
             </p>
           </div>
         </CompontsWapperCard>
-        <CompontsWapperCard>
+        <CompontsWapperCard shouldAnimate={false}>
           <div>
             <h1
               className="text-3xl p-6 text-center tracking-wide font-bold text-black-default"
@@ -99,7 +99,7 @@ export default function FontPage() {
             </h1>
           </div>
         </CompontsWapperCard>
-        <CompontsWapperCard>
+        <CompontsWapperCard shouldAnimate={false}>
           <div>
             <div className="p-10 flex justify-between">
               <RangeInput

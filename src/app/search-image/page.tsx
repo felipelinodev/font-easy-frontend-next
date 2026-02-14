@@ -110,7 +110,7 @@ export default function ChatBot() {
       </div>
 
       <div>
-        <CompontsWapperCard>
+        <CompontsWapperCard shouldAnimate={false}>
           <div className="p-5 w-full">
             <label
               htmlFor="file-upload"
