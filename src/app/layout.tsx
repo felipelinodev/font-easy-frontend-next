@@ -62,7 +62,7 @@ export default async function RootLayout({
         <Providers>
           <ProfileContextProvider user={userData} token={authCookie} favoriteFonts={favoriteFonts}>
             <MainContextProvider>
-              <div className="fixed z-50 top-0 right-0 left-0">
+              <div id="floating-menu-wrapper" className="fixed z-50 top-0 right-0 left-0">
                 <FloatingMenu />
               </div>
               <Link href="/chatbot" className="flex items-center justify-center fixed bottom-10 right-10 w-16 h-16 rounded-full bg-primary-orange bg-[url(/LogoOnly.png)] bg-no-repeat bg-size-[60%] bg-center shadow-lg z-50 hover:scale-105 transition-transform duration-300">

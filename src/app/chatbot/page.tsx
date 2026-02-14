@@ -117,7 +117,9 @@ export default function ChatBot() {
   }, [draftWeight]);
 
   return (
+
     <div className="mt-24 mb-10 min-h-full flex items-center justify-center flex-col">
+
       <div className="pt-10 pb-8 flex flex-col items-center">
         <p className="text-2xl pt-5 bg-linear-to-r from-black-default to-gray-muted-contrast bg-clip-text text-transparent">
           Ola
@@ -129,7 +131,7 @@ export default function ChatBot() {
       </div>
 
       <div>
-        <CompontsWapperCard>
+        <CompontsWapperCard shouldAnimate={(!fonts || fonts.length === 0) && keywords.length === 0}>
           <div>
             <div>
               <TextAreaInput

@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
-import './TargetCursor.css';
 
 export interface TargetCursorProps {
   targetSelector?: string;
@@ -27,16 +26,19 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   const tickerFnRef = useRef<(() => void) | null>(null);
   const activeStrengthRef = useRef({ current: 0 });
 
-  const isMobile = useMemo(() => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
     const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const isSmallScreen = window.innerWidth <= 768;
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
     const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
     const isMobileUserAgent = mobileRegex.test(userAgent.toLowerCase());
-    return (hasTouchScreen && isSmallScreen) || isMobileUserAgent;
+    setIsMobile((hasTouchScreen && isSmallScreen) || isMobileUserAgent);
   }, []);
 
-  const constants = useMemo(() => ({ borderWidth: 3, cornerSize: 12 }), []);
+  // Aumentei um pouco o cornerSize para a curva ficar mais visível
+  const constants = useMemo(() => ({ borderWidth: 3, cornerSize: 14 }), []);
 
   const moveCursor = useCallback((x: number, y: number) => {
     if (!cursorRef.current) return;
@@ -177,11 +179,13 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
       const cursorX = gsap.getProperty(cursorRef.current, 'x') as number;
       const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
 
+      // Adicionei um pequeno offset (4px) para as bordas não ficarem "coladas" no elemento
+      const offset = 4;
       targetCornerPositionsRef.current = [
-        { x: rect.left - borderWidth, y: rect.top - borderWidth },
-        { x: rect.right + borderWidth - cornerSize, y: rect.top - borderWidth },
-        { x: rect.right + borderWidth - cornerSize, y: rect.bottom + borderWidth - cornerSize },
-        { x: rect.left - borderWidth, y: rect.bottom + borderWidth - cornerSize }
+        { x: rect.left - borderWidth - offset, y: rect.top - borderWidth - offset },
+        { x: rect.right + borderWidth + offset - cornerSize, y: rect.top - borderWidth - offset },
+        { x: rect.right + borderWidth + offset - cornerSize, y: rect.bottom + borderWidth + offset - cornerSize },
+        { x: rect.left - borderWidth - offset, y: rect.bottom + borderWidth + offset - cornerSize }
       ];
 
       isActiveRef.current = true;
@@ -266,27 +270,43 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
     };
   }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
 
-  useEffect(() => {
-    if (isMobile || !cursorRef.current || !spinTl.current) return;
-    if (spinTl.current.isActive()) {
-      spinTl.current.kill();
-      spinTl.current = gsap
-        .timeline({ repeat: -1 })
-        .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
-    }
-  }, [spinDuration, isMobile]);
+  if (isMobile) return null;
 
-  if (isMobile) {
-    return null;
-  }
+  // ESTILIZAÇÃO DOS CANTOS ARREDONDADOS
+  // Adicionei 'rounded-tl-lg', 'rounded-tr-lg', etc., para cada respectivo canto.
+  const cornerClass = "target-cursor-corner absolute top-1/2 left-1/2 w-3.5 h-3.5 border-[3px] border-primary-orange";
 
   return (
-    <div ref={cursorRef} className="target-cursor-wrapper">
-      <div ref={dotRef} className="target-cursor-dot" />
-      <div className="target-cursor-corner corner-tl" />
-      <div className="target-cursor-corner corner-tr" />
-      <div className="target-cursor-corner corner-br" />
-      <div className="target-cursor-corner corner-bl" />
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 w-0 h-0 pointer-events-none z-9999"
+      style={{ willChange: 'transform' }}
+    >
+      <div
+        ref={dotRef}
+        className="absolute top-1/2 left-1/2 w-1 h-1 bg-primary-orange rounded-full -translate-x-1/2 -translate-y-1/2"
+      />
+
+      {/* Canto Superior Esquerdo */}
+      <div
+        className={`${cornerClass} -translate-x-[150%] -translate-y-[150%] border-r-0 border-b-0 rounded-tl-md`}
+        style={{ willChange: 'transform' }}
+      />
+      {/* Canto Superior Direito */}
+      <div
+        className={`${cornerClass} translate-x-1/2 -translate-y-[150%] border-l-0 border-b-0 rounded-tr-md`}
+        style={{ willChange: 'transform' }}
+      />
+      {/* Canto Inferior Direito */}
+      <div
+        className={`${cornerClass} translate-x-1/2 translate-y-1/2 border-l-0 border-t-0 rounded-br-md`}
+        style={{ willChange: 'transform' }}
+      />
+      {/* Canto Inferior Esquerdo */}
+      <div
+        className={`${cornerClass} -translate-x-[150%] translate-y-1/2 border-r-0 border-t-0 rounded-bl-md`}
+        style={{ willChange: 'transform' }}
+      />
     </div>
   );
 };
