@@ -16,7 +16,7 @@ export function DropDownContextMenu({ setIsOpen, setActiveTool, activeTool }: Dr
 
     const handleSearchImage = () => {
         setIsOpen(false)
-        router.push('/search-image')
+        //router.push('/search-image')
     }
 
     const handleSearch = () => {
@@ -30,7 +30,7 @@ export function DropDownContextMenu({ setIsOpen, setActiveTool, activeTool }: Dr
     }
 
     return (
-        <div className="absolute bottom-10 left-0 z-20 w-48 rounded-2xl bg-gray-surface border-2 shadow-xl border-white p-2">
+        <div className="absolute  bottom-10 left-0 z-20 w-full min-w-60 rounded-2xl bg-gray-surface border-2 shadow-xl border-white p-2">
             <p className="py-3 ml-4 text-sm flex text-black-default border-t-rounded-2xl border-b border-b-gray-escure">
                 Ferramentas
             </p>
@@ -47,7 +47,13 @@ export function DropDownContextMenu({ setIsOpen, setActiveTool, activeTool }: Dr
                 onClick={handleSearchImage}
                 className="flex rounded-sm items-center gap-2 w-full px-4 py-2 hover:bg-gray-muted-primary/75 text-sm text-black-default cursor-pointer transition-colors"
             >
-                <ScanSearch size={18} /> Search Image
+                <ScanSearch size={18} />
+                <span className="flex items-center gap-2">
+                    Search Image
+                    <span className="rounded-full bg-gray-escure text-xs px-2 py-0.5 whitespace-nowrap">
+                        Em Breve
+                    </span>
+                </span>
             </button>
         </div>
     );

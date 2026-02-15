@@ -86,6 +86,7 @@ export default function Home() {
         hideDefaultCursor
         parallaxOn
         hoverDuration={0.2}
+        
       />
 
       <div id="hero-section" className="bg-center w-full h-screen bg-[url(/backgroun-home-page.jpg)] bg-contain bg-no-repeat flex flex-col items-center pt-50 z-0">
