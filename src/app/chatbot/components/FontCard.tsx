@@ -1,10 +1,12 @@
 
 import { useProfile } from "@/app/context/ProfileContext";
 import { createFavoriteFont } from "@/lib/RequetsApiNode";
-import { Download, Heart } from "lucide-react";
+import { CircleX, Download, Heart } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
+import ButtonFE from "@/components/font-easy-ui/Button";
+import { verifyIfUserAuth } from "@/app/actions/verify-auth";
 
 
 
@@ -43,6 +45,8 @@ export const FontCard = ({
   const [heartClick, setHeartClick] = useState<string>("empty")
   const [loadingSaveFont, setLoadingSaveFont] = useState<boolean>(false)
 
+  const [isAuth, setIsAuth] = useState<boolean>(false)
+
   const handleRedirect = () => {
     redirect(fontsDownloadLinks.regular);
   };
@@ -50,6 +54,13 @@ export const FontCard = ({
   const router = useRouter();
 
   const handleSaveFavoriteFont = async () => {
+    const verifyAuth = await verifyIfUserAuth()
+
+    if (!verifyAuth && !isAuth) {
+      setIsAuth(true)
+      return
+    }
+
     const currentHeartClick = heartClick === "fill" ? "empty" : "fill";
     setHeartClick(currentHeartClick)
 
@@ -93,10 +104,23 @@ export const FontCard = ({
       font-style: normal;}
      `}
       </style>
-
       <div
-        className={`hover:bg-white-default/40 overflow-y-clip max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t border-gray-escure`}
+        className={`relative hover:bg-white-default/40 max-w-[864.98px] ml-6 pl-3 pr-3 mr-6 flex items-center justify-between min-h-[129.92px] border-t border-gray-escure`}
       >
+        {isAuth && (
+          <div className="absolute bottom-[calc(100%-45px)] right-1 z-50 bg-gray-surface rounded-2xl w-64 border-2 p-4 flex items-center justify-center flex-col shadow-xl border-white">
+            <button
+              onClick={() => setIsAuth(false)}
+              className="absolute top-2 right-1 p-2  text-gray-muted-contrast/70  hover:bg-gray-escure cursor-pointer text-lg leading-none rounded-full"
+            >
+              <CircleX size={20} />
+            </button>
+            <h1 className="text-sm text-center text-black-default p-3 pt-1">Faça login para favoritar</h1>
+            <ButtonFE textSize={undefined} variant="primary">
+              Fazer Login
+            </ButtonFE>
+          </div>
+        )}
         <h1 onClick={() => router.push(`/chatbot/${fontIdUnique}`)}
           className="text-black-default cursor-pointer inline-block"
           style={{

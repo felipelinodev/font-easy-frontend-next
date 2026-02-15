@@ -13,6 +13,7 @@ import { WordsAndsWeight } from "./components/WordsAndsWeight";
 import { normalizeTo100 } from "@/lib/NormalizePrompt";
 import { MainContext } from "../context/MainContext";
 import { JSONContent } from "@tiptap/core";
+import LoaderSearch from "./components/LoaderSearch";
 
 type WordsAndsWeightProps = {
   word: string;
@@ -186,7 +187,7 @@ export default function ChatBot() {
                 </>
               ) : (
                 <div className="flex items-center justify-center pb-5">
-                  <Loader />
+                  <LoaderSearch />
                 </div>
               )}
             </div>
@@ -199,6 +200,7 @@ export default function ChatBot() {
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
             >
+
               {fonts &&
                 fonts?.map((f) => (
                   <FontCard
