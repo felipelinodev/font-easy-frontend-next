@@ -29,15 +29,21 @@ export function DropDownMenuProfile() {
       }
     };
 
+    const handleScroll = () => {
+      setIsOpen(false);
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <div ref={areRef} className="flex text-black-default flex-col items-center">
+    <div ref={areRef} className="relative justify-center flex text-black-default flex-col items-center">
       <Link
         onClick={handdleOpen}
         className="h-8 w-8  bg-gray-escure rounded-full flex items-center justify-center"
@@ -48,7 +54,7 @@ export function DropDownMenuProfile() {
       {isOpen && (
         <div
           id="drow-down"
-          className="absolute z-10 w-full max-w-[177.33px] top-24 rounded-2xl bg-gray-surface border-2 shadow-xl border-white"
+          className="absolute z-10 w-[177.33px] left-1/2 -translate-x-1/2 top-13 rounded-2xl bg-gray-surface border-2 shadow-xl border-white"
         >
           <div>
             <header className="border-b border-b-gray-escure p-3 flex justify-end">
@@ -57,7 +63,7 @@ export function DropDownMenuProfile() {
               </Link>
             </header>
             <p className="text-sm max-w-28 pl-3 pt-2">
-              Faça login Pra salvar suas fontes Favoritas
+              Faça login Pra salvar<br /> suas fontes Favoritas
             </p>
           </div>
           <div className="p-2">
@@ -67,11 +73,12 @@ export function DropDownMenuProfile() {
             >
               Entrar
             </button>
-            <button className=" hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full  w-full">
-              <Link href="/signup">
-                Criar conta
-              </Link>
-            </button>
+            <Link
+              href="/signup"
+              className="block text-center hover:bg-gray-escure hover:cursor-pointer text-sm p-1 rounded-full w-full"
+            >
+              Criar conta
+            </Link>
           </div>
         </div>
       )}

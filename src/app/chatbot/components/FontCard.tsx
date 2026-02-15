@@ -116,7 +116,7 @@ export const FontCard = ({
               <CircleX size={20} />
             </button>
             <h1 className="text-sm text-center text-black-default p-3 pt-1">Faça login para favoritar</h1>
-            <ButtonFE textSize={undefined} variant="primary">
+            <ButtonFE textSize={undefined} onClick={() => router.push(`/login`)} variant="primary">
               Fazer Login
             </ButtonFE>
           </div>
