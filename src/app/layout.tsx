@@ -9,8 +9,15 @@ import { Providers } from "@/app/components/Providers";
 import { cookies } from "next/headers";
 import { getFavoriteFont } from "@/lib/RequetsApiNode";
 import Link from "next/link";
+import { Metadata } from "next";
 
-
+export const metadata: Metadata = {
+  title: "Font Easy",
+  description: "Escolha suas fontes de uma maneira jamais vista.",
+  icons: {
+    icon: "/favicon.ico?v=2",
+  },
+};
 
 const poppins = Poppins({
   subsets: ["latin"],

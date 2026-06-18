@@ -74,7 +74,7 @@ export default function Login() {
               id="password"
             />
           </div>
-          <Link href="#" className="flex justify-end underline text-black-default text-sm">
+          <Link href="/forgot-password" className="flex justify-end underline text-black-default text-sm">
             Esqueceu a senha?
           </Link>
           <div className="flex flex-col mt-5 items-center gap-1">

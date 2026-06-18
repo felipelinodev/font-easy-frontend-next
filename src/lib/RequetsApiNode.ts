@@ -179,6 +179,38 @@ async function deleteFavoriteFont(font_id: number, token: string) {
     return res.json()  
 }
 
+async function forgotPasswordRequest(data: { email: string }) {
+    const API_URL = await getBackendUrl();
+    const res = await fetch(`${API_URL}/auth/forgot-password`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!res.ok) {
+        throw new Error("Erro ao solicitar redefinição de senha.");
+    }
+    return res.json();
+}
+
+async function resetPasswordRequest(data: { token: string; password: string }) {
+    const API_URL = await getBackendUrl();
+    const res = await fetch(`${API_URL}/auth/reset-password`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!res.ok) {
+        throw new Error("Erro ao redefinir senha.");
+    }
+    return res.json();
+}
+
 
 export{ 
     loginUserRequest,
@@ -189,4 +221,6 @@ export{
     createFavoriteFont,
     getFavoriteFont,
     deleteFavoriteFont,
+    forgotPasswordRequest,
+    resetPasswordRequest,
 }
