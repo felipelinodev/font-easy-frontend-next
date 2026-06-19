@@ -89,7 +89,7 @@ export default function Home() {
         
       />
 
-      <div id="hero-section" className="bg-center w-full h-screen bg-[url(/backgroun-home-page.jpg)] bg-contain bg-no-repeat flex flex-col items-center pt-50 z-0">
+      <div id="hero-section" className="bg-center w-full h-screen bg-[url(/backgroun-home-page.jpg)] dark:bg-[url(/backgroun-home-page_darkmode.png)] bg-contain bg-no-repeat flex flex-col items-center pt-50 z-0">
         <div className="w-full max-w-[810px]">
           <Headline
             className="w-full h-auto block" // Garante que o SVG preencha a div
@@ -137,12 +137,12 @@ export default function Home() {
             />
           </div>
 
-          <div className="float-card h-17 w-17 flex justify-center bg-white/50 backdrop-blur-sm relative border border-white/70 -top-10 ml-16 items-center text-primary-orange rounded-[9px]">
+          <div className="float-card h-17 w-17 flex justify-center bg-gray-surface/50 backdrop-blur-sm relative border border-gray-escure/70 -top-10 ml-16 items-center text-primary-orange rounded-[9px]">
             <Zap size={31} />
           </div>
         </div>
       </div>
-      <section id="next-section" className="rounded-t-4xl min-h-screen w-full bg-[#F4F4F4] relative z-10 pt-10 ">
+      <section id="next-section" className="rounded-t-4xl min-h-screen w-full bg-white-full relative z-10 pt-10 ">
         <article className="flex items-center flex-col">
           {/* <h1 className="text-4xl font-bold p-11 text-primary-orange">
             Sobre nós

@@ -8,6 +8,7 @@ import ButtonFE from "@/components/font-easy-ui/Button";
 import { DropDownMenuProfile } from "./DropDownMenuProfile";
 import { DropDownMenuProfileAuth } from "./DropDownMenuProfileAuth";
 import { verifyIfUserAuth } from "../actions/verify-auth";
+import { useTheme } from "next-themes";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,7 +17,8 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 export const FloatingMenu = () => {
-  const [isSwicth, setIsSwitch] = useState<boolean>();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isAuth, setIsAuth] = useState<boolean>(false)
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -43,10 +45,11 @@ export const FloatingMenu = () => {
   }, { scope: menuRef });
 
   const handdleSwitch = () => {
-    setIsSwitch(!isSwicth);
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   useEffect(() => {
+    setMounted(true);
     const checkAuth = async () => {
       const isAuthenticated = await verifyIfUserAuth()
       console.log("Resultado:", isAuthenticated)
@@ -68,7 +71,7 @@ export const FloatingMenu = () => {
           unoptimized
         />
       </Link>
-      <CustomSwitch checked={isSwicth!} onChange={handdleSwitch} />
+      {mounted && <CustomSwitch checked={theme === "dark"} onChange={handdleSwitch} />}
       <ul className="flex items-center gap-4">
         <li>
           <Link className="text-sm text-black-default font-medium" href="#">

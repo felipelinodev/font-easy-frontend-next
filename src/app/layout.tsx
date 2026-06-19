@@ -75,8 +75,8 @@ export default async function RootLayout({
 
 
   return (
-    <html lang="pt-br" data-theme="light" className="bg-[#F4F4F4]">
-      <body className={`${poppins.variable} h-screen antialiased bg-[#F4F4F4]`}>
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={`${poppins.variable} h-screen antialiased bg-white-full text-black-default transition-colors duration-300`}>
         <Providers>
           <ProfileContextProvider user={userData} token={authCookie} favoriteFonts={favoriteFonts}>
             <MainContextProvider>

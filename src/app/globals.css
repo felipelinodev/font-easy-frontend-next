@@ -147,6 +147,16 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Font Easy Dark Mode overrides */
+  --blackfe: #dedfdf;
+  --whitefe: #1e1e1c;
+  --whitefull: #121212;
+
+  --gray3: #1e1e1c;
+  --gray4: #3f3f3f;
+  --gray5: #4b4b4b;
+  --gray6: #a3a3a3;
 }
 
 @layer base {
