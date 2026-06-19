@@ -10,6 +10,8 @@ import { cookies } from "next/headers";
 import { getFavoriteFont } from "@/lib/RequetsApiNode";
 import Link from "next/link";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Font Easy",
@@ -31,12 +33,25 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
+  const session = await getServerSession(authOptions);
   const cookiesList = await cookies();
-  const authCookie = cookiesList.get("font-easy-auth")?.value;
+  let authCookie = cookiesList.get("font-easy-auth")?.value;
+
+  // Se o usuário logou com Google e o cookie ainda não existe,
+  // usa o backendToken da sessão NextAuth para setar o cookie
+  if (!authCookie && session && (session as any).backendToken) {
+    authCookie = (session as any).backendToken;
+    cookiesList.set("font-easy-auth", authCookie!, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+  }
 
   let userData = null;
-  let favoriteFonts
+  let favoriteFonts;
 
   if (authCookie) {
     try {
