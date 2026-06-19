@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { CookieSetter } from "@/app/components/CookieSetter";
 
 export const metadata: Metadata = {
   title: "Font Easy",
@@ -38,16 +39,11 @@ export default async function RootLayout({
   let authCookie = cookiesList.get("font-easy-auth")?.value;
 
   // Se o usuário logou com Google e o cookie ainda não existe,
-  // usa o backendToken da sessão NextAuth para setar o cookie
+  // usa o backendToken da sessão NextAuth
+  let needsCookieSet = false;
   if (!authCookie && session && (session as any).backendToken) {
     authCookie = (session as any).backendToken;
-    cookiesList.set("font-easy-auth", authCookie!, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7,
-    });
+    needsCookieSet = true;
   }
 
   let userData = null;
@@ -94,6 +90,7 @@ export default async function RootLayout({
             </MainContextProvider>
           </ProfileContextProvider>
         </Providers>
+        {needsCookieSet && <CookieSetter token={authCookie!} />}
       </body>
     </html>
   );
